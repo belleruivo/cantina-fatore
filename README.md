@@ -12,4 +12,5 @@ Um sistema web  para gerenciamento da cantina escolar da Fatore.
   [FICHA CANTINA FUNCIONARIO.pdf](https://github.com/user-attachments/files/17131629/FICHA.CANTINA.FUNCIONARIO.pdf) | 
   [Arquivos Lanchonete - CAIXA.pdf](https://github.com/user-attachments/files/17131628/Arquivos.Lanchonete.-.CAIXA.pdf)
 
-# ❗ Ao final da documentação compartilhar com o e-mail do professor (raul.castanhari@ifsp.edu.br) para que ele possa visualizar e ter acesso completo de edição!
+# ❗ Atenção
+-  Ao final da documentação compartilhar com o e-mail do professor (raul.castanhari@ifsp.edu.br) para que ele possa visualizar e ter acesso completo de edição!
