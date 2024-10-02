@@ -4,11 +4,15 @@ Um sistema web  para gerenciamento da cantina escolar da Fatore.
 **'NOME DO SISTEMA'** é uma aplicação web para gerenciamento de estoque de produtos e vendas da cantina da escola Fatore. Ele permite cadastrar produtos e acompanhar, em tempo real, o status desses produtos linkado aos respectivos funcionários e alunos que compram lá, fornecendo uma gestão mais eficaz e automatizada, substituindo as anotações que atualmente são feitas de forma manual.
 
 # 📂 Documentação do projeto (em andamento):
-- Documentação a ser entregue ao docente Raul que leciona a máteria de "Engenharia de Software I" (Irá conter posteriormente a descrição do sistema, contada através de um storytelling, a tabela de requisitos etc.):
+- Documentação a ser entregue ao docente Raul que leciona a máteria de "Engenharia de Software I" (Irá conter posteriormente a descrição do sistema, contada através de um storytelling, entre outras coisas...):
   https://docs.google.com/document/d/1QUtotkTpi1qj_pYJ-UfnCTtvBNfcHTPlUBBHB6YIx0k/edit
-- Roteiro da entrevista com a moça que administra a cantina:
+- Link do Diagrama de Casos de Uso (MIRO): 
+  https://miro.com/welcomeonboard/dXVzeUxUZ2x4Rm13Q0J1Y2tvRjB2UFdBTDhWSUVVT1ZoV0thRFpJNXBmTEZSdEFyOFBKRTJXampzVXNJMTF6V3wzNDU4NzY0NTk0MDQxNzAwMTY0fDI=?share_link_id=419345744906
+- Diagrama de Sequência do sistema:
+  (Ainda não realizado)
+- Roteiro da entrevista com a administradora da cantina:
   https://docs.google.com/document/d/15-W_Sygy-3uT94bQAWz6yMVYDPU0lfv2o1sIp6UFLS4/edit?usp=sharing
-- PDF's enviados pela moça da cantina para ser usado de embasamento para o sistema web:
+- PDF's enviados pela administradora da cantina para ser usado de embasamento para o sistema web:
   [FICHA CANTINA FUNCIONARIO.pdf](https://github.com/user-attachments/files/17131629/FICHA.CANTINA.FUNCIONARIO.pdf) | 
   [Arquivos Lanchonete - CAIXA.pdf](https://github.com/user-attachments/files/17131628/Arquivos.Lanchonete.-.CAIXA.pdf)
 
