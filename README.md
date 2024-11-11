@@ -14,5 +14,10 @@ Uma aplicação web para gerenciamento de estoque de produtos e vendas da cantin
   [FICHA CANTINA FUNCIONARIO.pdf](https://github.com/user-attachments/files/17131629/FICHA.CANTINA.FUNCIONARIO.pdf) | 
   [Arquivos Lanchonete - CAIXA.pdf](https://github.com/user-attachments/files/17131628/Arquivos.Lanchonete.-.CAIXA.pdf)
 
+# Requisitos do Sistema
+- Complemento do professor Murilo (mesmo projeto)
+https://docs.google.com/document/d/1GSCLXw9mMsOHmNb4Gp5KQDVg9RVnoDKD6tClzs_K3OM/edit?usp=sharing
+
+
 # ❗ Atenção
 -  Ao final da documentação, dar acesso para o professor dos DOCS acima (raul.castanhari@ifsp.edu.br). Assim ele poderá visualizar e ter acesso completo de edição!
