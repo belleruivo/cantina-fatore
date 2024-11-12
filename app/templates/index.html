@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Bem-vindo à Cantina</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+        <h1>Bem-vindo à Cantina!</h1>
+        <ul>
+            <!-- teste -->
+            {% for cliente in content %}
+                <li>{{ cliente[0] }} - {{ cliente[1] }}</li>  
+            {% endfor %}
+        </ul>
+        <script src="{{ url_for('static', filename='script.js') }}"></script>
+    </body>
+</html>
