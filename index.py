@@ -4,5 +4,5 @@ from app import create_app
 app = create_app() # instancia a aplicação
 
 if __name__ == "__main__":
-    # roda a aplicação no localhost na porta 5000, com o debug ativado porém não rolou precisa rodar o flask debug (modo desenvolvimento)
+    # roda a aplicação no localhost na porta 5000, com o debug ativado. por via da dúvidas rodar o flask debug (modo desenvolvimento)
     app.run(debug=True)
