@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Bem-vindo à Cantina</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/style.css') }}">
     </head>
     <body>
         <h1>Bem-vindo à Cantina!</h1>
@@ -14,6 +14,6 @@
                 <li>{{ cliente[0] }} - {{ cliente[1] }}</li>  
             {% endfor %}
         </ul>
-        <script src="{{ url_for('static', filename='script.js') }}"></script>
+        <script src="{{ url_for('static', filename='../static/js/script.js') }}"></script>
     </body>
 </html>
