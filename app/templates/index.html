@@ -3,17 +3,17 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Bem-vindo à Cantina</title>
+        <title>Fatore | Login </title>
         <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/style.css') }}">
     </head>
     <body>
-        <h1>Bem-vindo à Cantina!</h1>
         <ul>
-            <!-- teste -->
+            <!-- teste pra ver se tá puxando do bd -->
             {% for cliente in content %}
                 <li>{{ cliente[0] }} - {{ cliente[1] }}</li>  
+                <li><a href="{{ url_for('product_list') }}">Produtos</a></li>
             {% endfor %}
         </ul>
-        <script src="{{ url_for('static', filename='../static/js/script.js') }}"></script>
     </body>
+    <!-- <script src="{{ url_for('static', filename='../static/js/script.js') }}"></script> -->
 </html>
