@@ -19,7 +19,8 @@ Uma aplicação web para gerenciamento de estoque de produtos e vendas da cantin
 # 👉 Demanda de apresentação e tópicos importantes
 - Complemento do professor Murilo (mesmo projeto)
 https://docs.google.com/document/d/1GSCLXw9mMsOHmNb4Gp5KQDVg9RVnoDKD6tClzs_K3OM/edit?usp=sharing
-
+- Tabela de Requisitos do Sistema com relacionamento dos Temas do Murilo
+https://docs.google.com/spreadsheets/d/1UFcxQhnkiL-1MxqyGinWnsqYcGQjLjMAd7bxrTQZdgQ/edit?usp=sharing
 
 # ❗ Atenção
 -  Ao final da documentação, dar acesso para o professor dos DOCS acima (raul.castanhari@ifsp.edu.br). Assim ele poderá visualizar e ter acesso completo de edição!
