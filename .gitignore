@@ -24,3 +24,5 @@ Thumbs.db
 # Ignore IDE/editor directories
 .vscode/
 .idea/
+
+node_modules/
