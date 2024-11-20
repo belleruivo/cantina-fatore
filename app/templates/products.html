@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Fatore | Produtos </title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/style.css') }}">
-        <!-- <script src="https://cdn.tailwindcss.com"></script> -->
-    </head>
-    <body className="bg-red-700">
-        <h1>Teste produtos</h1>
-    </body>
-    <script src="{{ url_for('static', filename='../static/js/script.js') }}"></script>
-</html>
+{% extends "layout.html" %}
+
+{% block title %}Produtos{% endblock %}
+
+{% block content %}
+    <h1 class="text-2xl font-bold mb-4">PRODUTOS</h1>
+    <!-- Conteúdo adicional da página de produtos -->
+    <p>Bem-vindo à página de produtos!</p>
+{% endblock %}
