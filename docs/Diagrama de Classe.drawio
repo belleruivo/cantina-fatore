@@ -323,30 +323,30 @@
           <mxGeometry y="34" width="160" height="27" as="geometry" />
         </mxCell>
         <mxCell id="OVBkLCfnEWp9YMBtG4E_-12" value="BancoDeDados" style="swimlane;fontStyle=2;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="1306" y="1325" width="160" height="196" as="geometry">
+          <mxGeometry x="1306" y="1325" width="254" height="196" as="geometry">
             <mxRectangle x="230" y="140" width="160" height="26" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
         <mxCell id="OVBkLCfnEWp9YMBtG4E_-13" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="OVBkLCfnEWp9YMBtG4E_-12">
-          <mxGeometry y="26" width="160" height="8" as="geometry" />
+          <mxGeometry y="26" width="254" height="8" as="geometry" />
         </mxCell>
         <mxCell id="OVBkLCfnEWp9YMBtG4E_-84" value="+ criar_tabelas()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=0" vertex="1" parent="OVBkLCfnEWp9YMBtG4E_-12">
-          <mxGeometry y="34" width="160" height="27" as="geometry" />
+          <mxGeometry y="34" width="254" height="27" as="geometry" />
         </mxCell>
         <mxCell id="OVBkLCfnEWp9YMBtG4E_-105" value="+ salva_produtos()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=0" vertex="1" parent="OVBkLCfnEWp9YMBtG4E_-12">
-          <mxGeometry y="61" width="160" height="27" as="geometry" />
+          <mxGeometry y="61" width="254" height="27" as="geometry" />
         </mxCell>
-        <mxCell id="OVBkLCfnEWp9YMBtG4E_-107" value="+ remove_produtos()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=0" vertex="1" parent="OVBkLCfnEWp9YMBtG4E_-12">
-          <mxGeometry y="88" width="160" height="27" as="geometry" />
+        <mxCell id="OVBkLCfnEWp9YMBtG4E_-107" value="+ remove_produtos(id_produto: Integer)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=0" vertex="1" parent="OVBkLCfnEWp9YMBtG4E_-12">
+          <mxGeometry y="88" width="254" height="27" as="geometry" />
         </mxCell>
         <mxCell id="OVBkLCfnEWp9YMBtG4E_-108" value="+ salva_funcionarios()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=0" vertex="1" parent="OVBkLCfnEWp9YMBtG4E_-12">
-          <mxGeometry y="115" width="160" height="27" as="geometry" />
+          <mxGeometry y="115" width="254" height="27" as="geometry" />
         </mxCell>
-        <mxCell id="OVBkLCfnEWp9YMBtG4E_-109" value="+ remove_funcionarios()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=0" vertex="1" parent="OVBkLCfnEWp9YMBtG4E_-12">
-          <mxGeometry y="142" width="160" height="27" as="geometry" />
+        <mxCell id="OVBkLCfnEWp9YMBtG4E_-109" value="+ remove_funcionarios(id_funcionario: Integer)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=0" vertex="1" parent="OVBkLCfnEWp9YMBtG4E_-12">
+          <mxGeometry y="142" width="254" height="27" as="geometry" />
         </mxCell>
         <mxCell id="OVBkLCfnEWp9YMBtG4E_-121" value="+ salva_vendas()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=0" vertex="1" parent="OVBkLCfnEWp9YMBtG4E_-12">
-          <mxGeometry y="169" width="160" height="27" as="geometry" />
+          <mxGeometry y="169" width="254" height="27" as="geometry" />
         </mxCell>
         <mxCell id="OVBkLCfnEWp9YMBtG4E_-26" value="Funcionario" style="swimlane;fontStyle=2;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="916" y="1520" width="194" height="169" as="geometry">
