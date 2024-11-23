@@ -476,7 +476,7 @@
           <mxGeometry width="200" height="30" as="geometry" />
         </mxCell>
         <mxCell id="OVBkLCfnEWp9YMBtG4E_-77" value="- No nosso código falta a opção de atualizar e excluir, funcionário e produto" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="1190" y="840" width="130" height="130" as="geometry" />
+          <mxGeometry x="1096" y="920" width="130" height="130" as="geometry" />
         </mxCell>
         <mxCell id="OVBkLCfnEWp9YMBtG4E_-78" value="Precisamos confirmas com o professor o banco de dados" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#ffcc99;strokeColor=#36393d;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="1286" y="1136" width="150" height="150" as="geometry" />
