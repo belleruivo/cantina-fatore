@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36" version="24.8.9">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="878" dy="1684" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1263" dy="1909" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
@@ -407,7 +407,7 @@
           <mxGeometry y="34" width="160" height="27" as="geometry" />
         </mxCell>
         <mxCell id="OVBkLCfnEWp9YMBtG4E_-12" value="Banco de Dados" style="swimlane;fontStyle=2;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="2980" y="283" width="160" height="169" as="geometry">
+          <mxGeometry x="3020" y="320.5" width="160" height="169" as="geometry">
             <mxRectangle x="230" y="140" width="160" height="26" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
@@ -487,7 +487,7 @@
           <mxGeometry y="196" width="160" height="27" as="geometry" />
         </mxCell>
         <mxCell id="OVBkLCfnEWp9YMBtG4E_-43" value="GeradorRelatorio" style="swimlane;fontStyle=2;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="2690" y="240" width="160" height="109" as="geometry">
+          <mxGeometry x="2460" y="156.5" width="160" height="109" as="geometry">
             <mxRectangle x="230" y="140" width="160" height="26" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
@@ -498,7 +498,7 @@
           <mxGeometry y="34" width="160" height="27" as="geometry" />
         </mxCell>
         <mxCell id="OVBkLCfnEWp9YMBtG4E_-56" value="Venda" style="swimlane;fontStyle=2;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="2380" y="167.5" width="160" height="150" as="geometry">
+          <mxGeometry x="2210" y="150" width="160" height="150" as="geometry">
             <mxRectangle x="230" y="140" width="160" height="26" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
@@ -531,19 +531,60 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="OVBkLCfnEWp9YMBtG4E_-70" value="" style="swimlane;startSize=0;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="1900" y="269" width="240" height="121" as="geometry" />
+          <mxGeometry x="1920" y="160" width="240" height="121" as="geometry" />
         </mxCell>
         <mxCell id="OVBkLCfnEWp9YMBtG4E_-72" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;{&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;...&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;Interface do Usuário:: menu inicial()&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;...&lt;/div&gt;&lt;div style=&quot;&quot;&gt;}&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="OVBkLCfnEWp9YMBtG4E_-70">
           <mxGeometry x="10" y="40" width="220" height="81" as="geometry" />
         </mxCell>
         <mxCell id="OVBkLCfnEWp9YMBtG4E_-71" value="    main()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="OVBkLCfnEWp9YMBtG4E_-70">
-          <mxGeometry y="1" width="200" height="30" as="geometry" />
+          <mxGeometry width="200" height="30" as="geometry" />
         </mxCell>
         <mxCell id="OVBkLCfnEWp9YMBtG4E_-77" value="- No nosso código falta a opção de atualizar e excluir, funcionário e produto" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="2060" y="-440" width="210" height="210" as="geometry" />
         </mxCell>
         <mxCell id="OVBkLCfnEWp9YMBtG4E_-78" value="Estou em dúvida se os métodos que são relacionados ao banco, exemplo" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#ffcc99;strokeColor=#36393d;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="3000" width="150" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="OVBkLCfnEWp9YMBtG4E_-86" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="OVBkLCfnEWp9YMBtG4E_-12" target="OVBkLCfnEWp9YMBtG4E_-49">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="2780" y="390" as="sourcePoint" />
+            <mxPoint x="2660" y="195" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="OVBkLCfnEWp9YMBtG4E_-87" value="" style="endArrow=classic;html=1;rounded=0;exitX=-0.002;exitY=0.863;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1.021;entryY=0.269;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="OVBkLCfnEWp9YMBtG4E_-84" target="OVBkLCfnEWp9YMBtG4E_-38">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="2770" y="460" as="sourcePoint" />
+            <mxPoint x="2820" y="410" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="OVBkLCfnEWp9YMBtG4E_-88" value="" style="endArrow=classic;html=1;rounded=0;exitX=-0.014;exitY=0.973;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1.008;entryY=0.771;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="OVBkLCfnEWp9YMBtG4E_-84" target="OVBkLCfnEWp9YMBtG4E_-31">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="2910" y="570" as="sourcePoint" />
+            <mxPoint x="2960" y="520" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="OVBkLCfnEWp9YMBtG4E_-89" value="&lt;u&gt;-&amp;nbsp;listaFuncionário&lt;/u&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="2830" y="578.5" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="OVBkLCfnEWp9YMBtG4E_-90" value="&lt;u&gt;-&amp;nbsp;listaProduto&lt;/u&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="2460" y="548.5" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="OVBkLCfnEWp9YMBtG4E_-91" value="&lt;u&gt;-&amp;nbsp;listaVendas&lt;/u&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="2620" y="170" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="OVBkLCfnEWp9YMBtG4E_-93" value="&lt;font&gt;Aqui a acho que é legal criar uma classe com todas as funcionalidades que estão no main, separadas por métodos, fiz um exemplo usando &quot;menu_inicial&quot;, mas podemos pensar juntos depois&lt;/font&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#ffcc99;strokeColor=#36393d;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="1870" y="556.5" width="150" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="OVBkLCfnEWp9YMBtG4E_-94" value="Menu_Inicial" style="swimlane;fontStyle=2;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="2030" y="398.5" width="160" height="150" as="geometry">
+            <mxRectangle x="230" y="140" width="160" height="26" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="OVBkLCfnEWp9YMBtG4E_-98" value="&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="OVBkLCfnEWp9YMBtG4E_-94">
+          <mxGeometry y="26" width="160" height="27" as="geometry" />
+        </mxCell>
+        <mxCell id="OVBkLCfnEWp9YMBtG4E_-99" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="OVBkLCfnEWp9YMBtG4E_-94">
+          <mxGeometry y="53" width="160" height="8" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
