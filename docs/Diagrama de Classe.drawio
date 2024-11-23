@@ -498,7 +498,7 @@
           <mxGeometry y="34" width="160" height="27" as="geometry" />
         </mxCell>
         <mxCell id="OVBkLCfnEWp9YMBtG4E_-56" value="Venda" style="swimlane;fontStyle=2;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="2210" y="150" width="160" height="150" as="geometry">
+          <mxGeometry x="2210" y="150" width="160" height="169" as="geometry">
             <mxRectangle x="230" y="140" width="160" height="26" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
@@ -571,20 +571,6 @@
         </mxCell>
         <mxCell id="OVBkLCfnEWp9YMBtG4E_-91" value="&lt;u&gt;-&amp;nbsp;listaVendas&lt;/u&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="2620" y="170" width="110" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="OVBkLCfnEWp9YMBtG4E_-93" value="&lt;font&gt;Aqui a acho que é legal criar uma classe com todas as funcionalidades que estão no main, separadas por métodos, fiz um exemplo usando &quot;menu_inicial&quot;, mas podemos pensar juntos depois&lt;/font&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#ffcc99;strokeColor=#36393d;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="1870" y="556.5" width="150" height="150" as="geometry" />
-        </mxCell>
-        <mxCell id="OVBkLCfnEWp9YMBtG4E_-94" value="Menu_Inicial" style="swimlane;fontStyle=2;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="2030" y="398.5" width="160" height="150" as="geometry">
-            <mxRectangle x="230" y="140" width="160" height="26" as="alternateBounds" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="OVBkLCfnEWp9YMBtG4E_-98" value="&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="OVBkLCfnEWp9YMBtG4E_-94">
-          <mxGeometry y="26" width="160" height="27" as="geometry" />
-        </mxCell>
-        <mxCell id="OVBkLCfnEWp9YMBtG4E_-99" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="OVBkLCfnEWp9YMBtG4E_-94">
-          <mxGeometry y="53" width="160" height="8" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
