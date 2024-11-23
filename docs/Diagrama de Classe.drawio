@@ -448,8 +448,9 @@
         <mxCell id="OVBkLCfnEWp9YMBtG4E_-63" value="+ realizar_venda()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=0" vertex="1" parent="OVBkLCfnEWp9YMBtG4E_-56">
           <mxGeometry y="142" width="184" height="27" as="geometry" />
         </mxCell>
-        <mxCell id="OVBkLCfnEWp9YMBtG4E_-67" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.464;entryY=1.006;entryDx=0;entryDy=0;entryPerimeter=0;dashed=1;endArrow=block;endFill=0;dashPattern=8 8;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="OVBkLCfnEWp9YMBtG4E_-37" target="OVBkLCfnEWp9YMBtG4E_-35">
+        <mxCell id="OVBkLCfnEWp9YMBtG4E_-67" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=block;endFill=0;dashPattern=8 8;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="OVBkLCfnEWp9YMBtG4E_-37">
           <mxGeometry relative="1" as="geometry">
+            <mxPoint x="810" y="1440" as="targetPoint" />
             <Array as="points">
               <mxPoint x="636" y="1480" />
               <mxPoint x="810" y="1480" />
