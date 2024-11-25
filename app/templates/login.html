@@ -4,69 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fatore | Login</title>
-    <!-- Carregar SweetAlert -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <!-- Link para TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <div>
-        <h1>Login</h1>
-        <form id="login-form" method="POST">
-            <label for="nome_usuario">Nome de Usuário:</label>
-            <input type="text" id="nome_usuario" name="nome_usuario" placeholder="Ex.: murilinho_gamer" required>
+<body class="h-screen w-screen bg-cover bg-center bg-no-repeat flex items-center justify-center"
+      style="background-image: url('../static/img/imagem_login_crianca_original.png');">
+    <!-- Overlay para opacidade do fundo -->
+    <div class="absolute inset-0 bg-black opacity-50"></div>
 
-            <label for="senha">Senha:</label>
-            <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+    <!-- Container principal do login -->
+    <div class="relative bg-white p-8 rounded-lg shadow-lg w-full max-w-md z-10">
+        <!-- Espaço para logo -->
+        <div class="flex justify-center mb-6">
+            <img src="../static/img/logo_fatore_laranja_svg.svg" alt="Logo" class="w-50 h-50">
+        </div>
 
-            <button type="submit">Entrar</button>
+        <!-- Formulário -->
+        <form id="login-form" method="POST" class="space-y-4">
+            <div>
+                <label for="nome_usuario" class="block text-sm font-bold text-blue-900">Nome de Usuário:</label>
+                <input type="text" id="nome_usuario" name="nome_usuario" placeholder="Ex.: murilinho_gamer" 
+                       class="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:ring-orange-500 focus:border-orange-500" 
+                       required>
+            </div>
+
+            <div>
+                <label for="senha" class="block text-sm font-bold text-blue-900">Senha:</label>
+                <input type="password" id="senha" name="senha" placeholder="Digite sua senha" 
+                       class="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:ring-orange-500 focus:border-orange-500" 
+                       required>
+            </div>
+
+            <button type="submit" 
+                    class="w-full py-3 px-4 bg-orange-600 text-white font-semibold rounded-lg hover:bg-orange-700">
+                Entrar
+            </button>
         </form>
     </div>
 
-    <script>
-        // adc evento no forms de login
-        document.getElementById('login-form').addEventListener('submit', function(e) {
-            e.preventDefault(); // evita o envio tradicional do formulário
-
-            // coleta os dados do formulário
-            const formData = new FormData(this);
-
-            // envia os dados para o servidor via POST
-            fetch("/login", {
-                method: "POST",
-                body: formData
-            })
-            .then(response => response.json()) // processa a resposta JSON do servidor
-            .then(data => {
-                if (data.success) {
-                    // login bem-sucedido, exibe o SweetAlert
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Login bem-sucedido!',
-                        text: 'Redirecionando para os produtos...',
-                        showConfirmButton: false,
-                        timer: 1500
-                    }).then(() => {
-                        // redireciona para a página de produtos
-                        window.location.href = data.redirect_url;
-                    });
-                } else {
-                    // erro no login
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Erro!',
-                        text: data.message  // msg de erro vinda do servidor
-                    });
-                }
-            })
-            .catch(error => {
-                // caso algo de errado aconteça
-                console.error('Erro:', error);
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Erro!',
-                    text: 'Houve um problema ao tentar fazer o login. Tente novamente.'
-                });
-            });
-        });
-    </script>
+    <script src="../static/js/login.js"></script>
 </body>
 </html>

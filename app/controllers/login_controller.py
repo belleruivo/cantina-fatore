@@ -19,7 +19,7 @@ class LoginController:
                 return jsonify(success=False, message="Ocorreu um erro no servidor: " + str(e))
         
         # para o método GET, retorna o formulário de login
-        return render_template('login.html')
+        return render_template('login.html', show_sidebar=False)
 
     @staticmethod
     def logout():

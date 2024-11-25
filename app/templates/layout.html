@@ -10,9 +10,10 @@
     {% endblock %}
 </head>
 <body class="flex h-screen bg-gray-100">
+    {% if show_sidebar %}
     <!-- sidebar -->
-    <aside class="w-64 bg-blue-700 text-white flex flex-col h-screen">
-        <div class="flex items-center justify-center h-20 bg-blue-800">
+    <aside class="w-64 bg-orange-600 text-white flex flex-col h-screen">
+        <div class="flex items-center justify-center h-20 bg-blue-800-orange-600">
             <img src="{{ url_for('static', filename='img/logo_fatore_branco.png') }}" alt="Logo" class="w-12 h-12">
         </div>
 
@@ -20,34 +21,35 @@
             <ul class="mt-4 space-y-2">
                 <li>
                     <!-- usa o nome do segundo parâmetro -->
-                    <a href="{{ url_for('product_list') }}" class="flex items-center p-3 hover:bg-blue-600">
+                    <a href="{{ url_for('product_list') }}" class="flex items-center p-3 hover:bg-orange-700">
                         <i class="fas fa-box mr-3"></i> Produtos
                     </a>
                 </li>
                 <li>   
-                    <a href="{{ url_for('funcionarios') }}" class="flex items-center p-3 hover:bg-blue-600">
+                    <a href="{{ url_for('funcionarios') }}" class="flex items-center p-3 hover:bg-orange-700">
                         <i class="fas fa-users mr-3"></i> Funcionários
                     </a>
                 </li>
                 <li>
-                    <a href="{{ url_for('vendas_do_dia') }}" class="flex items-center p-3 hover:bg-blue-600">
+                    <a href="{{ url_for('vendas_do_dia') }}" class="flex items-center p-3 hover:bg-orange-700">
                         <i class="fas fa-shopping-cart mr-3"></i> Vendas do Dia
                     </a>
                 </li>
                 <li>
-                    <a href="{{ url_for('relatorios') }}" class="flex items-center p-3 hover:bg-blue-600">
+                    <a href="{{ url_for('relatorios') }}" class="flex items-center p-3 hover:bg-orange-700">
                         <i class="fas fa-chart-line mr-3"></i> Relatórios
                     </a>
                 </li>
             </ul>
         </nav>
 
-        <div class="p-4 bg-blue-800">
-            <a href="{{ url_for('logout') }}" class="flex items-center p-3 hover:bg-blue-600">
+        <div class="p-4 bg-orange-600">
+            <a href="{{ url_for('logout') }}" class="flex items-center p-3 hover:bg-orange-700">
                 <i class="fas fa-sign-out-alt mr-3"></i> Sair
             </a>
         </div>
     </aside>
+    {% endif %}
 
     <main class="flex-grow p-6">
         {% block content %}

@@ -13,7 +13,7 @@ def home():
         results = get_db_connection()
         
         # aqui renderiza os resultados para templates (login é a primeira página que abre)
-        return render_template("login.html", content=results)
+        return render_template("login.html", content=results, show_sidebar=True)
         
     else:
         return "O que veio do meu form: " + request.form['conteudo']
