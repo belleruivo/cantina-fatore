@@ -6,6 +6,6 @@ def get_db_connection():
         user="root",
         password="",
         database="cantina_fatore",
-        # port=3307 
+        port=3307 
         # na faculdade, descomentar a linha de port.
     )

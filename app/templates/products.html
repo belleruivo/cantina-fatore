@@ -3,7 +3,72 @@
 {% block title %}Produtos{% endblock %}
 
 {% block content %}
-    <h1 class="text-2xl font-bold mb-4">PRODUTOS</h1>
-    <!-- Conteúdo adicional da página de produtos -->
-    <p>Bem-vindo à página de produtos!</p>
+<h1 class="text-2xl font-bold mb-4">PRODUTOS</h1>
+
+<!-- Seção do Header: Barra de Pesquisa e Botão "Adicionar Produto" -->
+<div class="mb-6">
+    <div class="flex items-center justify-between space-x-4">
+        <!-- Barra de Pesquisa centralizada -->
+        <div class="flex-1 flex justify-center">
+            <input type="text" placeholder="Buscar produto..." class="w-full max-w-md px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500" />
+        </div>
+        <!-- Botão "Adicionar Produto" alinhado à direita -->
+        <div>
+            <button class="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-600">
+                Adicionar produto
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<!-- Grid para separar a Listagem de Produtos e a Sidebar do Carrinho -->
+<div class="grid grid-cols-1 lg:grid-cols-[3fr_1fr] gap-6">
+
+    <!-- Listagem de Produtos -->
+    <div class="space-y-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {% for produto in produtos %}
+            <div class="bg-white p-4 shadow rounded flex flex-col justify-between w-full max-w-xs mx-auto">
+                <h2 class="text-lg font-semibold">{{ produto.nome }}</h2>
+                
+                <div class="flex gap-2 mt-2">
+                    <form action="/produtos/editar/{{ produto.id }}" method="get">
+                        <button type="submit" class="bg-yellow-500 text-black px-4 py-2 rounded hover:bg-yellow-600">
+                            Editar
+                        </button>
+                    </form>
+                    <form action="/produtos/excluir/{{ produto.id }}" method="post">
+                        <button type="submit" class="bg-red-500 text-black px-4 py-2 rounded hover:bg-red-600">
+                            Excluir
+                        </button>
+                    </form>            
+                </div>
+                <p>Preço: R$ {{ produto.preco }}</p>
+                <p>Quantidade: {{ produto.quantidade_estoque }}</p>
+                <form action="/vender/{{ produto.id }}" method="post" class="mt-2">
+                    <button type="submit" class="bg-green-500 text-black px-4 py-2 rounded hover:bg-green-600 w-full">
+                        Vender
+                    </button>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Sidebar Fixa (Carrinho) -->
+    <div class="lg:block fixed right-0 top-[calc(24px+6rem)] h-[calc(100vh-6rem)] bg-gray-800 text-white w-80 p-6 overflow-y-auto z-50">
+        <h2 class="text-2xl font-bold mb-4">Carrinho</h2>
+        <div id="carrinho-conteudo">
+            <p>Nenhum produto no carrinho.</p>
+            <!-- Aqui vai o conteúdo do carrinho (lista de produtos vendidos) -->
+        </div>
+    </div>
+
+</div>
+
+<!-- Linha horizontal fina que começa no topo do carrinho e vai até o lado esquerdo -->
+<div class="fixed left-0 top-[calc(24px+6rem)] w-full h-px bg-gray-600"></div>
+
+
 {% endblock %}
