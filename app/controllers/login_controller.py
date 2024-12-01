@@ -1,4 +1,5 @@
 from flask import render_template, request, jsonify, session, redirect, url_for
+from functools import wraps
 from app.models.login_model import LoginModel
 
 class LoginController:
@@ -12,7 +13,7 @@ class LoginController:
                 if LoginModel.verificar_login(nome_usuario, senha):
                     # salva o usuário na sessão
                     session['usuario'] = nome_usuario
-                    return jsonify(success=True, redirect_url=url_for('product_list'))  # Redireciona para /produtos
+                    return jsonify(success=True, redirect_url=url_for('product_list'))  # redireciona para /produtos
                 else:
                     return jsonify(success=False, message="Credenciais inválidas. Tente novamente.")
             except Exception as e:
@@ -25,3 +26,12 @@ class LoginController:
     def logout():
         session.pop('usuario', None)  # remove o usuário da sessão
         return redirect(url_for('login')) 
+
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'usuario' not in session:
+            # redireciona para a página de login se o usuário não estiver logado
+            return redirect(url_for('login'))
+        return f(*args, **kwargs)
+    return decorated_function

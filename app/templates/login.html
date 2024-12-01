@@ -1,48 +1,48 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fatore | Login</title>
-    <!-- Link para TailwindCSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-</head>
-<body class="h-screen w-screen bg-cover bg-center bg-no-repeat flex items-center justify-center"
-      style="background-image: url('../static/img/imagem_login_crianca_original.png');">
-    <!-- Overlay para opacidade do fundo -->
-    <div class="absolute inset-0 bg-black opacity-50"></div>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Fatore | Login</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> <!-- essa linha que adiciona o tailwind -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    </head>
+    <body class="h-screen w-screen bg-cover bg-center bg-no-repeat flex items-center justify-center"
+        style="background-image: url('../static/img/imagem_login_crianca_original.png');">
 
-    <!-- Container principal do login -->
-    <div class="relative bg-white p-8 rounded-lg shadow-lg w-full max-w-md z-10">
-        <!-- Espaço para logo -->
-        <div class="flex justify-center mb-6">
-            <img src="../static/img/logo_fatore_laranja.svg" alt="Logo" class="w-50 h-50">
+        <div class="absolute inset-0 bg-black opacity-50"></div>
+
+        <div class="relative bg-white p-8 rounded-lg shadow-lg w-full max-w-md z-10">
+            <div class="flex justify-center mb-6">
+                <img src="../static/img/logo_fatore_laranja.svg" alt="Logo" class="w-50 h-50">
+            </div>
+
+            <form id="login-form" method="POST" class="space-y-4">
+                <div>
+                    <label for="nome_usuario" class="block text-sm font-bold text-blue-900">Usuário:</label>
+                    <input type="text" id="nome_usuario" name="nome_usuario" placeholder="Digite seu nome de usuário..." 
+                        class="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:ring-orange-500 focus:border-orange-500" 
+                        required>
+                </div>
+
+                <div>
+                    <label for="senha" class="block text-sm font-bold text-blue-900">Senha:</label>
+                    <input type="password" id="senha" name="senha" placeholder="Digite sua senha..." 
+                        class="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:ring-orange-500 focus:border-orange-500" 
+                        required>
+                </div>
+
+                <div class="flex justify-center">
+                    <button type="submit" 
+                            class="w-80 py-3 px-4 rounded-full bg-orange-600 text-white font-semibold hover:bg-orange-700">
+                        Entrar
+                    </button>
+                </div>
+            </form>
         </div>
 
-        <!-- Formulário -->
-        <form id="login-form" method="POST" class="space-y-4">
-            <div>
-                <label for="nome_usuario" class="block text-sm font-bold text-blue-900">Nome de Usuário:</label>
-                <input type="text" id="nome_usuario" name="nome_usuario" placeholder="Ex.: murilinho_gamer" 
-                       class="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:ring-orange-500 focus:border-orange-500" 
-                       required>
-            </div>
-
-            <div>
-                <label for="senha" class="block text-sm font-bold text-blue-900">Senha:</label>
-                <input type="password" id="senha" name="senha" placeholder="Digite sua senha" 
-                       class="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:ring-orange-500 focus:border-orange-500" 
-                       required>
-            </div>
-
-            <button type="submit" 
-                    class="w-80 py-3 px-4 rounded-full bg-orange-600 text-white font-semibold hover:bg-orange-700">
-                Entrar
-            </button>
-        </form>
-    </div>
-
-    <script src="../static/js/login.js"></script>
-</body>
+        <script src="../static/js/login.js"></script>
+        
+    </body>
 </html>

@@ -1,6 +1,9 @@
 from flask import render_template, redirect, url_for, request
 from app.models.products_model import obter_todos_produtos
-from app.utils.database import get_db_connection  # Certifique-se de que o caminho esteja correto
+from app.models.products_model import atualizar_produto
+from app.utils.database import get_db_connection  
+
+import os
 
 def product_list():
     conexao = get_db_connection()
@@ -12,9 +15,52 @@ def product_list():
     produtos = obter_todos_produtos()  # usa a função que já converte os dados em objetos Produto
     return render_template("products.html", produtos=produtos, show_sidebar=True)
 
+from app.models.products_model import adicionar_produto
+
+def salvar_produto():
+    if request.method == 'POST':
+        nome = request.form['nome']
+        preco = request.form['preco']
+        categoria = request.form['categoria']
+        quantidade_estoque = request.form['quantidade']
+        foto = request.files['foto'] if 'foto' in request.files else None
+
+        # onde as fotos serão salvas
+        upload_dir = os.path.join('app', 'static', 'uploads')
+
+        # garante que o diretório existe
+        os.makedirs(upload_dir, exist_ok=True)
+
+        foto_caminho = None
+        if foto:
+            # nome seguro para evitar problemas
+            from werkzeug.utils import secure_filename
+            foto_nome = secure_filename(foto.filename)
+            foto_caminho = os.path.join(upload_dir, foto_nome)
+
+            foto.save(foto_caminho)
+
+        adicionar_produto(nome, preco, categoria, quantidade_estoque, foto_caminho)
+
+        return redirect(url_for('product_list'))
+
 def editar_produto(id):
-    # aqui você buscaria o produto pelo ID e mostraria um formulário de edição
-    return f"Editar produto {id}"
+    if request.method == 'POST':
+        nome = request.form['nome']
+        preco = request.form['preco']
+        categoria = request.form['categoria']
+        quantidade_estoque = request.form['quantidade']
+        foto = request.files['foto'] if 'foto' in request.files else None
+
+        foto_caminho = None
+        if foto:
+            from werkzeug.utils import secure_filename
+            foto_nome = secure_filename(foto.filename)
+            foto_caminho = f"static/uploads/{foto_nome}"
+            foto.save(foto_caminho)
+
+        atualizar_produto(id, nome, preco, categoria, quantidade_estoque, foto_caminho)
+        return redirect(url_for('product_list'))
 
 def excluir_produto(id):
     conexao = get_db_connection()

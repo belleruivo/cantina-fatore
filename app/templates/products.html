@@ -3,16 +3,12 @@
 {% block title %}Produtos{% endblock %}
 
 {% block content %}
-<h1 class="text-2xl font-bold mb-4">PRODUTOS</h1>
 
-<!-- Seção do Header: Barra de Pesquisa e Botão "Adicionar Produto" -->
 <div class="mb-6">
     <div class="flex items-center justify-between space-x-4">
-        <!-- Barra de Pesquisa centralizada -->
         <div class="flex-1 flex justify-center">
             <input type="text" placeholder="Buscar produto..." class="w-full max-w-md px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500" />
         </div>
-        <!-- Botão "Adicionar Produto" alinhado à direita -->
         <div>
             <button class="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-600">
                 Adicionar produto
@@ -21,11 +17,8 @@
     </div>
 </div>
 
-
-<!-- Grid para separar a Listagem de Produtos e a Sidebar do Carrinho -->
 <div class="grid grid-cols-1 lg:grid-cols-[3fr_1fr] gap-6">
 
-    <!-- Listagem de Produtos -->
     <div class="space-y-6">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {% for produto in produtos %}
@@ -34,9 +27,12 @@
                 
                 <div class="flex gap-2 mt-2">
                     <form action="/produtos/editar/{{ produto.id }}" method="get">
-                        <button type="submit" class="bg-yellow-500 text-black px-4 py-2 rounded hover:bg-yellow-600">
+                        <button type="button" 
+                                class="bg-yellow-500 text-black px-4 py-2 rounded hover:bg-yellow-600"
+                                onclick="abrirPopupEditar('{{ produto.id }}', '{{ produto.nome }}', '{{ produto.categoria }}', '{{ produto.quantidade_estoque }}', '{{ produto.preco }}', '{{ produto.foto }}')">
                             Editar
                         </button>
+
                     </form>
                     <form action="/produtos/excluir/{{ produto.id }}" method="post">
                         <button type="submit" class="bg-red-500 text-black px-4 py-2 rounded hover:bg-red-600">
@@ -56,19 +52,101 @@
         </div>
     </div>
 
-    <!-- Sidebar Fixa (Carrinho) -->
     <div class="lg:block fixed right-0 top-[calc(24px+6rem)] h-[calc(100vh-6rem)] bg-gray-800 text-white w-80 p-6 overflow-y-auto z-50">
         <h2 class="text-2xl font-bold mb-4">Carrinho</h2>
         <div id="carrinho-conteudo">
             <p>Nenhum produto no carrinho.</p>
-            <!-- Aqui vai o conteúdo do carrinho (lista de produtos vendidos) -->
         </div>
     </div>
 
 </div>
 
-<!-- Linha horizontal fina que começa no topo do carrinho e vai até o lado esquerdo -->
-<div class="fixed left-0 top-[calc(24px+6rem)] w-full h-px bg-gray-600"></div>
+<div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40"></div>
 
+<div id="popup" class="fixed inset-0 flex items-center justify-center hidden z-50">
+    <div class="bg-white p-6 rounded-md shadow-lg w-96">
+        <h2 class="text-xl font-bold mb-4">Adicionar Produto</h2>
+        <form action="{{ url_for('salvar_produto') }}" method="post" enctype="multipart/form-data">
+            <div class="mb-4">
+                <label for="nome" class="block text-sm font-medium text-gray-700">Nome do Produto</label>
+                <input type="text" id="nome" name="nome" class="mt-1 p-2 w-full border rounded-md" required>
+            </div>
+            <div class="mb-4">
+                <label for="categoria" class="block text-sm font-medium text-gray-700">Categoria</label>
+                <select id="categoria" name="categoria" class="mt-1 p-2 w-full border rounded-md" required>
+                    <option value="Bebida">Bebida</option>
+                    <option value="Lanche">Lanche</option>
+                    <option value="Doce">Doce</option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label for="quantidade" class="block text-sm font-medium text-gray-700">Quantidade</label>
+                <input type="number" id="quantidade" name="quantidade" class="mt-1 p-2 w-full border rounded-md" required>
+            </div>
+            <div class="mb-4">
+                <label for="preco" class="block text-sm font-medium text-gray-700">Preço</label>
+                <input type="number" step="0.01" id="preco" name="preco" class="mt-1 p-2 w-full border rounded-md" required>
+            </div>
+            <div class="mb-4">
+                <label for="foto" class="block text-sm font-medium text-gray-700">Foto do Produto (opcional)</label>
+                <input type="file" id="foto" name="foto" class="mt-1 w-full">
+            </div>
+            <div class="flex justify-end space-x-4">
+                <button type="button" id="closePopup" class="px-4 py-2 bg-gray-300 text-black rounded hover:bg-gray-400">
+                    Cancelar
+                </button>
+                <button type="submit" class="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600">
+                    Salvar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="popup-editar" class="fixed inset-0 flex items-center justify-center hidden z-50">
+    <div class="bg-white p-6 rounded-md shadow-lg w-96">
+        <h2 class="text-xl font-bold mb-4">Editar Produto</h2>
+        <form id="editar-form" method="post" enctype="multipart/form-data">
+            <input type="hidden" id="produto-id" name="id">
+            <div class="mb-4">
+                <label for="editar-nome" class="block text-sm font-medium text-gray-700">Nome do Produto</label>
+                <input type="text" id="editar-nome" name="nome" class="mt-1 p-2 w-full border rounded-md" required>
+            </div>
+            <div class="mb-4">
+                <label for="editar-categoria" class="block text-sm font-medium text-gray-700">Categoria</label>
+                <select id="editar-categoria" name="categoria" class="mt-1 p-2 w-full border rounded-md" required>
+                    <option value="Bebida">Bebida</option>
+                    <option value="Lanche">Lanche</option>
+                    <option value="Doce">Doce</option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label for="editar-quantidade" class="block text-sm font-medium text-gray-700">Quantidade</label>
+                <input type="number" id="editar-quantidade" name="quantidade" class="mt-1 p-2 w-full border rounded-md" required>
+            </div>
+            <div class="mb-4">
+                <label for="editar-preco" class="block text-sm font-medium text-gray-700">Preço</label>
+                <input type="number" step="0.01" id="editar-preco" name="preco" class="mt-1 p-2 w-full border rounded-md" required>
+            </div>
+            <div class="mb-4">
+                <label for="editar-foto" class="block text-sm font-medium text-gray-700">Foto do Produto (opcional)</label>
+                <input type="file" id="editar-foto" name="foto" class="mt-1 w-full">
+            </div>
+            <div class="flex justify-end space-x-4">
+                <button type="button" id="closePopupEditar" class="px-4 py-2 bg-gray-300 text-black rounded hover:bg-gray-400">
+                    Cancelar
+                </button>
+                <button type="submit" class="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600">
+                    Salvar Alterações
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="../static/js/products.js"></script>
+
+<!-- Linha horizontal fina que começa no topo do carrinho e vai até o lado esquerdo -->
+<!-- <div class="fixed left-0 top-[calc(24px+6rem)] w-full h-px bg-gray-600"></div>  -->
 
 {% endblock %}
