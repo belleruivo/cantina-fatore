@@ -1,6 +1,6 @@
 const popup = document.getElementById('popup');
 const overlay = document.getElementById('overlay');
-const openPopupButton = document.querySelector('.bg-orange-500');
+const openPopupButton = document.querySelector('button.bg-orange-600');  // Garantir que está pegando o botão correto
 const closePopupButton = document.getElementById('closePopup');
 
 openPopupButton.addEventListener('click', () => {
@@ -13,12 +13,11 @@ closePopupButton.addEventListener('click', () => {
     overlay.classList.add('hidden');
 });
 
-// fechar o Popup ao clicar fora dele
+// Fechar o Popup ao clicar fora dele
 overlay.addEventListener('click', () => {
     popup.classList.add('hidden');
     overlay.classList.add('hidden');
 });
-
 
 function abrirPopupEditar(id, nome, categoria, quantidade, preco, foto) {
 const popupEditar = document.getElementById('popup-editar');

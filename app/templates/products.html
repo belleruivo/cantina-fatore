@@ -7,43 +7,50 @@
 <div class="mb-6">
     <div class="flex items-center justify-between space-x-4">
         <div class="flex-1 flex justify-center">
-            <input type="text" placeholder="Buscar produto..." class="w-full max-w-md px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500" />
+            <form action="{{ url_for('product_list') }}" method="get" class="w-full max-w-md">
+                <input type="text" name="query" placeholder="Buscar produto..." class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500" />
+            </form>
         </div>
         <div>
-            <button class="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-600">
+            <button class="bg-orange-600 text-white px-4 py-2 rounded-md hover:bg-orange-700">
                 Adicionar produto
             </button>
         </div>
     </div>
 </div>
 
-<div class="grid grid-cols-1 lg:grid-cols-[3fr_1fr] gap-6">
-
-    <div class="space-y-6">
+<div class="flex gap-6">
+    <div class="flex-1 space-y-6">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {% for produto in produtos %}
             <div class="bg-white p-4 shadow rounded flex flex-col justify-between w-full max-w-xs mx-auto">
-                <h2 class="text-lg font-semibold">{{ produto.nome }}</h2>
+                <h2 class="text-lg font-semibold text-center w-full">{{ produto.nome }}</h2>
+                <!-- <p>{{ produto.foto }}</p> -->
+
+                <div class="h-40 overflow-hidden rounded-t-3xl">
+                    <img src="{{ url_for('static', filename='uploads/' + produto.foto.split('uploads\\')[-1]) if produto.foto else url_for('static', filename='img/default-product.svg') }}" alt="Imagem do produto" class="w-full h-full object-cover">
+                </div>
                 
-                <div class="flex gap-2 mt-2">
+                <div class="flex gap-2 mt-2 justify-between">
                     <form action="/produtos/editar/{{ produto.id }}" method="get">
                         <button type="button" 
-                                class="bg-yellow-500 text-black px-4 py-2 rounded hover:bg-yellow-600"
+                                class="bg-yellow-500 text-white font-semibold px-4 py-2 rounded hover:bg-yellow-600"
                                 onclick="abrirPopupEditar('{{ produto.id }}', '{{ produto.nome }}', '{{ produto.categoria }}', '{{ produto.quantidade_estoque }}', '{{ produto.preco }}', '{{ produto.foto }}')">
                             Editar
                         </button>
-
                     </form>
                     <form action="/produtos/excluir/{{ produto.id }}" method="post">
-                        <button type="submit" class="bg-red-500 text-black px-4 py-2 rounded hover:bg-red-600">
+                        <button type="submit" class="bg-red-500 text-white font-semibold px-4 py-2 rounded hover:bg-red-600">
                             Excluir
                         </button>
                     </form>            
                 </div>
-                <p>Preço: R$ {{ produto.preco }}</p>
-                <p>Quantidade: {{ produto.quantidade_estoque }}</p>
+                <div class="flex justify-between mt-4 mb-1">
+                    <p class="text-lg font-semibold">Quantidade: <span class="font-normal">{{ produto.quantidade_estoque }}</span></p>
+                    <p class="text-xl text-orange-500 font-semibold ">R$ {{ produto.preco }}</p>
+                </div>
                 <form action="/vender/{{ produto.id }}" method="post" class="mt-2">
-                    <button type="submit" class="bg-green-500 text-black px-4 py-2 rounded hover:bg-green-600 w-full">
+                    <button type="submit" class="bg-green-500 text-white font-semibold px-4 py-2 rounded hover:bg-green-600 w-full">
                         Vender
                     </button>
                 </form>
@@ -52,13 +59,12 @@
         </div>
     </div>
 
-    <div class="lg:block fixed right-0 top-[calc(24px+6rem)] h-[calc(100vh-6rem)] bg-gray-800 text-white w-80 p-6 overflow-y-auto z-50">
+    <div class="lg:block h-auto bg-gray-800 text-white w-80 p-6 overflow-y-auto z-50">
         <h2 class="text-2xl font-bold mb-4">Carrinho</h2>
         <div id="carrinho-conteudo">
             <p>Nenhum produto no carrinho.</p>
         </div>
     </div>
-
 </div>
 
 <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40"></div>
@@ -77,6 +83,7 @@
                     <option value="Bebida">Bebida</option>
                     <option value="Lanche">Lanche</option>
                     <option value="Doce">Doce</option>
+                    <option value="Salgado">Salgado</option>
                 </select>
             </div>
             <div class="mb-4">
@@ -118,6 +125,7 @@
                     <option value="Bebida">Bebida</option>
                     <option value="Lanche">Lanche</option>
                     <option value="Doce">Doce</option>
+                    <option value="Salgado">Salgado</option>
                 </select>
             </div>
             <div class="mb-4">

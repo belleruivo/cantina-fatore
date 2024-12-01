@@ -20,7 +20,7 @@ def create_app():
     app.add_url_rule('/login', 'login', LoginController.login, methods=["GET", "POST"]) 
     app.add_url_rule('/logout', 'logout', LoginController.logout) 
     app.add_url_rule('/produtos', 'product_list', login_required(product_list))  
-    app.add_url_rule('/produtos/editar/<int:id>', 'editar_produto', login_required(editar_produto))  
+    app.add_url_rule('/produtos/editar/<int:id>', 'editar_produto', login_required(editar_produto), methods=['GET', 'POST'])  
     app.add_url_rule('/produtos/excluir/<int:id>', 'excluir_produto', login_required(excluir_produto), methods=["POST"])  
     app.add_url_rule('/produtos/vender/<int:id>', 'vender_produto', login_required(vender_produto), methods=["POST"])  
     app.add_url_rule('/funcionarios', 'funcionarios', login_required(employees_list))  

@@ -2,6 +2,7 @@ from flask import render_template, redirect, url_for, request
 from app.models.products_model import obter_todos_produtos
 from app.models.products_model import atualizar_produto
 from app.utils.database import get_db_connection  
+from app.models.products_model import adicionar_produto
 
 import os
 
@@ -15,7 +16,6 @@ def product_list():
     produtos = obter_todos_produtos()  # usa a função que já converte os dados em objetos Produto
     return render_template("products.html", produtos=produtos, show_sidebar=True)
 
-from app.models.products_model import adicionar_produto
 
 def salvar_produto():
     if request.method == 'POST':
@@ -40,6 +40,9 @@ def salvar_produto():
 
             foto.save(foto_caminho)
 
+            # armazena apenas o caminho relativo a partir de 'static/uploads'
+            foto_caminho = os.path.join('uploads', foto_nome)
+
         adicionar_produto(nome, preco, categoria, quantidade_estoque, foto_caminho)
 
         return redirect(url_for('product_list'))
@@ -56,8 +59,11 @@ def editar_produto(id):
         if foto:
             from werkzeug.utils import secure_filename
             foto_nome = secure_filename(foto.filename)
-            foto_caminho = f"static/uploads/{foto_nome}"
+            foto_caminho = os.path.join('app', 'static', 'uploads', foto_nome)
             foto.save(foto_caminho)
+
+            # armazena apenas o caminho relativo a partir de 'static/uploads'
+            foto_caminho = os.path.join('uploads', foto_nome)
 
         atualizar_produto(id, nome, preco, categoria, quantidade_estoque, foto_caminho)
         return redirect(url_for('product_list'))

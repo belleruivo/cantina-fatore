@@ -13,6 +13,17 @@ class Produto:
 # funções relacionadas ao banco
 from app.utils.database import get_db_connection
 
+def buscar_produtos(query):
+    conexao = get_db_connection()
+    cursor = conexao.cursor()
+    cursor.execute("SELECT * FROM produtos WHERE nome LIKE %s", ('%' + query + '%',))
+    resultados = cursor.fetchall()
+    conexao.close()
+    
+    # converte para objetos Produto
+    produtos = [Produto(*linha) for linha in resultados]
+    return produtos
+
 def obter_todos_produtos():
     conexao = get_db_connection()
     cursor = conexao.cursor()
