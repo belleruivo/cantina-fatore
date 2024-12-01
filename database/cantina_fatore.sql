@@ -117,8 +117,9 @@ CREATE TABLE `produtos` (
   `preco` decimal(10,2) NOT NULL,
   `categoria` varchar(100) DEFAULT NULL,
   `quantidade_estoque` int(11) NOT NULL DEFAULT 0,
+  `foto` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -127,6 +128,7 @@ CREATE TABLE `produtos` (
 
 LOCK TABLES `produtos` WRITE;
 /*!40000 ALTER TABLE `produtos` DISABLE KEYS */;
+INSERT INTO `produtos` VALUES (13,'Coxinha com Catupiry',5.50,'Salgado',10,'uploads\\coxinha.png'),(14,'Fini Amora',6.99,'Doce',8,'uploads\\fini_amora.png'),(15,'Bala Freegels',2.50,'Doce',20,'uploads\\freegels.jpg'),(16,'Água Mineral',2.50,'Bebida',13,'uploads\\agua.jpg'),(17,'Misto Quente',4.99,'Lanche',8,'uploads\\misto.jpg'),(18,'Pão de Queijo',5.00,'Salgado',22,'uploads\\pao_de_queijo.jpg'),(19,'KitKat Branco',4.99,'Doce',12,'uploads\\kitkat.jpg'),(20,'Salgadinho Fofura',3.00,'Salgado',7,NULL);
 /*!40000 ALTER TABLE `produtos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -168,4 +170,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-20 19:17:27
+-- Dump completed on 2024-12-01 20:24:45
