@@ -1,20 +1,18 @@
 from flask import render_template, redirect, url_for, request
-from app.models.products_model import obter_todos_produtos
-from app.models.products_model import atualizar_produto
+from app.models.products_model import obter_todos_produtos, buscar_produtos, obter_itens_carrinho, adicionar_ao_carrinho
+from app.models.products_model import atualizar_produto, adicionar_produto
 from app.utils.database import get_db_connection  
-from app.models.products_model import adicionar_produto
 
 import os
 
 def product_list():
-    conexao = get_db_connection()
-    cursor = conexao.cursor()
-    cursor.execute("SELECT * FROM produtos")
-    produtos = cursor.fetchall()
-    conexao.close()
-    
-    produtos = obter_todos_produtos()  # usa a função que já converte os dados em objetos Produto
-    return render_template("products.html", produtos=produtos, show_sidebar=True)
+    query = request.args.get('query')
+    if query:
+        produtos = buscar_produtos(query)
+    else:
+        produtos = obter_todos_produtos()
+    itens_carrinho = obter_itens_carrinho()
+    return render_template("products.html", produtos=produtos, itens_carrinho=itens_carrinho, show_sidebar=True)
 
 
 def salvar_produto():
@@ -77,10 +75,6 @@ def excluir_produto(id):
     return redirect(url_for('product_list'))
 
 def vender_produto(id):
-    quantidade = request.form.get('quantidade', 1)  # exemplo básico para capturar quantidade
-    conexao = get_db_connection()
-    cursor = conexao.cursor()
-    cursor.execute("INSERT INTO carrinho (produto_id, quantidade) VALUES (%s, %s)", (id, quantidade))
-    conexao.commit()
-    conexao.close()
+    quantidade = request.form.get('quantidade', 1)
+    adicionar_ao_carrinho(id, quantidade)
     return redirect(url_for('product_list'))

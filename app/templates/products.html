@@ -19,9 +19,9 @@
     </div>
 </div>
 
-<div class="flex gap-6">
-    <div class="flex-1 space-y-6">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="flex h-full">
+    <div class="flex-1 space-y-6 overflow-y-auto pr-24"> <!-- Adicionei padding à direita -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {% for produto in produtos %}
             <div class="bg-white p-4 shadow rounded flex flex-col justify-between w-full max-w-xs mx-auto">
                 <h2 class="text-lg font-semibold text-center w-full">{{ produto.nome }}</h2>
@@ -49,7 +49,7 @@
                     <p class="text-lg font-semibold">Quantidade: <span class="font-normal">{{ produto.quantidade_estoque }}</span></p>
                     <p class="text-xl text-orange-500 font-semibold ">R$ {{ produto.preco }}</p>
                 </div>
-                <form action="/vender/{{ produto.id }}" method="post" class="mt-2">
+                <form action="/produtos/vender/{{ produto.id }}" method="post" class="mt-2">
                     <button type="submit" class="bg-green-500 text-white font-semibold px-4 py-2 rounded hover:bg-green-600 w-full">
                         Vender
                     </button>
@@ -59,10 +59,27 @@
         </div>
     </div>
 
-    <div class="lg:block h-auto bg-gray-800 text-white w-80 p-6 overflow-y-auto z-50">
-        <h2 class="text-2xl font-bold mb-4">Carrinho</h2>
-        <div id="carrinho-conteudo">
-            <p>Nenhum produto no carrinho.</p>
+    <div class="h-screen bg-gray-800 text-white w-80 p-6 flex flex-col justify-between">
+        <div class="flex-grow overflow-y-auto">
+            <h2 class="text-2xl font-bold mb-4">Carrinho</h2>
+            <div id="carrinho-conteudo" class="overflow-y-auto max-h-[calc(100vh-12rem)]">
+                {% if itens_carrinho %}
+                    <ul>
+                        {% for item in itens_carrinho %}
+                            <li class="mb-2">
+                                <p>{{ item[1] }} - {{ item[2] }} x R$ {{ item[3] }}</p>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>Nenhum produto no carrinho.</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="mt-4">
+            <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 w-full">
+                Prosseguir
+            </button>
         </div>
     </div>
 </div>
@@ -153,8 +170,5 @@
 </div>
 
 <script src="../static/js/products.js"></script>
-
-<!-- Linha horizontal fina que começa no topo do carrinho e vai até o lado esquerdo -->
-<!-- <div class="fixed left-0 top-[calc(24px+6rem)] w-full h-px bg-gray-600"></div>  -->
 
 {% endblock %}

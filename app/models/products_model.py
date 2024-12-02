@@ -72,3 +72,25 @@ def atualizar_produto(id, nome, preco, categoria, quantidade_estoque, foto):
     cursor.execute(query, valores)
     conexao.commit()
     conexao.close()
+
+def adicionar_ao_carrinho(produto_id, quantidade):
+    conexao = get_db_connection()
+    cursor = conexao.cursor()
+    cursor.execute("""
+        INSERT INTO carrinho (produto_id, quantidade)
+        VALUES (%s, %s)
+    """, (produto_id, quantidade))
+    conexao.commit()
+    conexao.close()
+
+def obter_itens_carrinho():
+    conexao = get_db_connection()
+    cursor = conexao.cursor()
+    cursor.execute("""
+        SELECT c.id, p.nome, c.quantidade, p.preco
+        FROM carrinho c
+        JOIN produtos p ON c.produto_id = p.id
+    """)
+    itens = cursor.fetchall()
+    conexao.close()
+    return itens
