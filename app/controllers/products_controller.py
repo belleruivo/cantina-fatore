@@ -1,6 +1,5 @@
 from flask import render_template, redirect, url_for, request
-from app.models.products_model import obter_todos_produtos, buscar_produtos, obter_itens_carrinho, adicionar_ao_carrinho, remover_do_carrinho
-from app.models.products_model import atualizar_produto, adicionar_produto
+from app.models.products_model import obter_todos_produtos, buscar_produtos, obter_itens_carrinho, adicionar_ao_carrinho, remover_do_carrinho, atualizar_produto, adicionar_produto
 from app.utils.database import get_db_connection  
 
 import os
@@ -12,7 +11,7 @@ def product_list():
     else:
         produtos = obter_todos_produtos()
     
-    # Recupera itens do carrinho e o total
+    # recupera itens do carrinho e o total
     itens_carrinho, total = obter_itens_carrinho()
     return render_template("products.html", produtos=produtos, itens_carrinho=itens_carrinho, total=total, show_sidebar=True)
 

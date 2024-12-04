@@ -1,4 +1,4 @@
-// adc evento no forms de login
+// adiciona um evento no forms de login
 document.getElementById('login-form').addEventListener('submit', function(e) {
     e.preventDefault(); // evita o envio tradicional do formulário
 

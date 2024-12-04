@@ -1,6 +1,4 @@
 class LoginModel:
-    # (isabelle) -> previnir mysql injection!
-    # credenciais predefinidas no código, user e senha
     USUARIOS = {
         "admin": "admin123"
     }

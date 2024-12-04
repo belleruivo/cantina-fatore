@@ -79,20 +79,18 @@ def adicionar_ao_carrinho(produto_id, quantidade):
     conexao = get_db_connection()
     cursor = conexao.cursor()
 
-    # Verifica a quantidade disponível no estoque
     cursor.execute("SELECT quantidade_estoque FROM produtos WHERE id = %s", (produto_id,))
     estoque = cursor.fetchone()[0]
 
-    # Verifica se a quantidade solicitada é maior que o estoque
     if quantidade > estoque:
-        quantidade = estoque  # Ajusta a quantidade para o máximo disponível
+        quantidade = estoque  
     
-    # Verifica se o produto já está no carrinho
+    # verifica se o produto já está no carrinho
     cursor.execute("SELECT quantidade FROM carrinho WHERE produto_id = %s", (produto_id,))
     produto_existente = cursor.fetchone()
 
     if produto_existente:
-        # Se o produto já existe no carrinho, atualiza a quantidade
+        # se o produto já existe no carrinho, atualiza a quantidade
         nova_quantidade = produto_existente[0] + quantidade
         cursor.execute("""
             UPDATE carrinho
@@ -100,7 +98,7 @@ def adicionar_ao_carrinho(produto_id, quantidade):
             WHERE produto_id = %s
         """, (nova_quantidade, produto_id))
     else:
-        # Caso contrário, adiciona o produto ao carrinho
+        # caso contrário, adiciona o produto ao carrinho
         cursor.execute("""
             INSERT INTO carrinho (produto_id, quantidade)
             VALUES (%s, %s)
@@ -114,7 +112,7 @@ def obter_itens_carrinho():
     conexao = get_db_connection()
     cursor = conexao.cursor()
     
-    # Query para obter os itens e calcular o subtotal por produto
+    # query para obter os itens e calcular o subtotal por produto
     cursor.execute("""
         SELECT c.id, p.nome, SUM(c.quantidade) as quantidade, p.preco, 
                SUM(c.quantidade * p.preco) as subtotal
@@ -124,7 +122,7 @@ def obter_itens_carrinho():
     """)
     itens = cursor.fetchall()
 
-    # Calcula o total somando os subtotais
+    # calcula o total somando os subtotais
     total = sum(item[4] for item in itens)
 
     conexao.close()
@@ -135,14 +133,14 @@ def remover_do_carrinho(carrinho_id):
     conexao = get_db_connection()
     cursor = conexao.cursor()
     
-    # Obtém a quantidade atual no carrinho
+    # obtém a quantidade atual no carrinho
     cursor.execute("SELECT quantidade FROM carrinho WHERE id = %s", (carrinho_id,))
     resultado = cursor.fetchone()
 
     if resultado:
         quantidade_atual = resultado[0]
         if quantidade_atual > 1:
-            # Decrementa a quantidade
+            # decrementa a quantidade
             nova_quantidade = quantidade_atual - 1
             cursor.execute("""
                 UPDATE carrinho
@@ -150,7 +148,7 @@ def remover_do_carrinho(carrinho_id):
                 WHERE id = %s
             """, (nova_quantidade, carrinho_id))
         else:
-            # Remove o registro se a quantidade for 1
+            # remove o registro se a quantidade for 1
             cursor.execute("DELETE FROM carrinho WHERE id = %s", (carrinho_id,))
     
     conexao.commit()

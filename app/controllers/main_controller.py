@@ -1,7 +1,7 @@
 from flask import render_template, make_response, request
 from app.utils.database import get_db_connection # importa a funcao de conexao com banco
 
-def home():
+def home() -> str:
     # alguns testes no console
     if request.method == "GET":
         if request.cookies.get("usuario"):
