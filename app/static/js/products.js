@@ -19,24 +19,35 @@ overlay.addEventListener('click', () => {
     overlay.classList.add('hidden');
 });
 
+// Abertura do popup de edição
 function abrirPopupEditar(id, nome, categoria, quantidade, preco, foto) {
-const popupEditar = document.getElementById('popup-editar');
-const overlay = document.getElementById('overlay');
-const form = document.getElementById('editar-form');
+    const popupEditar = document.getElementById('popup-editar');
+    const overlay = document.getElementById('overlay');
+    const form = document.getElementById('editar-form');
 
-document.getElementById('produto-id').value = id;
-document.getElementById('editar-nome').value = nome;
-document.getElementById('editar-categoria').value = categoria;
-document.getElementById('editar-quantidade').value = quantidade;
-document.getElementById('editar-preco').value = preco;
+    // Preenche os campos do formulário com os valores recebidos
+    document.getElementById('produto-id').value = id;
+    document.getElementById('editar-nome').value = nome;
+    document.getElementById('editar-categoria').value = categoria;
+    document.getElementById('editar-quantidade').value = quantidade;
+    document.getElementById('editar-preco').value = preco;
 
-form.action = `/produtos/editar/${id}`;
+    // Atualiza a URL de envio do formulário
+    form.action = `/produtos/editar/${id}`;
 
-popupEditar.classList.remove('hidden');
-overlay.classList.remove('hidden');
+    // Exibe o popup e o overlay
+    popupEditar.classList.remove('hidden');
+    overlay.classList.remove('hidden');
 }
 
+// Fechamento do popup
 document.getElementById('closePopupEditar').addEventListener('click', () => {
-document.getElementById('popup-editar').classList.add('hidden');
-document.getElementById('overlay').classList.add('hidden');
+    document.getElementById('popup-editar').classList.add('hidden');
+    document.getElementById('overlay').classList.add('hidden');
+});
+
+// Fechar o popup ao clicar fora dele
+document.getElementById('overlay').addEventListener('click', () => {
+    document.getElementById('popup-editar').classList.add('hidden');
+    document.getElementById('overlay').classList.add('hidden');
 });

@@ -10,6 +10,7 @@ from app.controllers.sales_controller import sales_list
 from app.controllers.reports_controller import reports
 from app.controllers.products_controller import salvar_produto
 from app.controllers.login_controller import login_required  
+from app.controllers.products_controller import remover_produto_do_carrinho
 
 # inicializa os pacotes
 def create_app():
@@ -27,6 +28,7 @@ def create_app():
     app.add_url_rule('/vendas_do_dia', 'vendas_do_dia', login_required(sales_list))  
     app.add_url_rule('/relatorios', 'relatorios', login_required(reports))  
     app.add_url_rule('/produtos/salvar', 'salvar_produto', login_required(salvar_produto), methods=['POST'])  
+    app.add_url_rule('/remover/<int:carrinho_id>', 'remover_produto_do_carrinho',  login_required(remover_produto_do_carrinho), methods=['POST'])
     # esses 3 "parâmetros" são: o caminho da rota, o nome da rota (usado em layout) e o nome da função ou método que será executado ao acessar aquela rota.
     
     return app

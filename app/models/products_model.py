@@ -1,3 +1,5 @@
+from flask import flash, url_for, redirect
+
 class Produto:
     def __init__(self, id, nome, preco, categoria, quantidade_estoque, foto):
         self.id = id
@@ -76,21 +78,81 @@ def atualizar_produto(id, nome, preco, categoria, quantidade_estoque, foto):
 def adicionar_ao_carrinho(produto_id, quantidade):
     conexao = get_db_connection()
     cursor = conexao.cursor()
-    cursor.execute("""
-        INSERT INTO carrinho (produto_id, quantidade)
-        VALUES (%s, %s)
-    """, (produto_id, quantidade))
+
+    # Verifica a quantidade disponível no estoque
+    cursor.execute("SELECT quantidade_estoque FROM produtos WHERE id = %s", (produto_id,))
+    estoque = cursor.fetchone()[0]
+
+    # Verifica se a quantidade solicitada é maior que o estoque
+    if quantidade > estoque:
+        quantidade = estoque  # Ajusta a quantidade para o máximo disponível
+    
+    # Verifica se o produto já está no carrinho
+    cursor.execute("SELECT quantidade FROM carrinho WHERE produto_id = %s", (produto_id,))
+    produto_existente = cursor.fetchone()
+
+    if produto_existente:
+        # Se o produto já existe no carrinho, atualiza a quantidade
+        nova_quantidade = produto_existente[0] + quantidade
+        cursor.execute("""
+            UPDATE carrinho
+            SET quantidade = %s
+            WHERE produto_id = %s
+        """, (nova_quantidade, produto_id))
+    else:
+        # Caso contrário, adiciona o produto ao carrinho
+        cursor.execute("""
+            INSERT INTO carrinho (produto_id, quantidade)
+            VALUES (%s, %s)
+        """, (produto_id, quantidade))
+    
     conexao.commit()
     conexao.close()
+
 
 def obter_itens_carrinho():
     conexao = get_db_connection()
     cursor = conexao.cursor()
+    
+    # Query para obter os itens e calcular o subtotal por produto
     cursor.execute("""
-        SELECT c.id, p.nome, c.quantidade, p.preco
+        SELECT c.id, p.nome, SUM(c.quantidade) as quantidade, p.preco, 
+               SUM(c.quantidade * p.preco) as subtotal
         FROM carrinho c
         JOIN produtos p ON c.produto_id = p.id
+        GROUP BY c.produto_id, c.id
     """)
     itens = cursor.fetchall()
+
+    # Calcula o total somando os subtotais
+    total = sum(item[4] for item in itens)
+
     conexao.close()
-    return itens
+    return itens, total
+
+
+def remover_do_carrinho(carrinho_id):
+    conexao = get_db_connection()
+    cursor = conexao.cursor()
+    
+    # Obtém a quantidade atual no carrinho
+    cursor.execute("SELECT quantidade FROM carrinho WHERE id = %s", (carrinho_id,))
+    resultado = cursor.fetchone()
+
+    if resultado:
+        quantidade_atual = resultado[0]
+        if quantidade_atual > 1:
+            # Decrementa a quantidade
+            nova_quantidade = quantidade_atual - 1
+            cursor.execute("""
+                UPDATE carrinho
+                SET quantidade = %s
+                WHERE id = %s
+            """, (nova_quantidade, carrinho_id))
+        else:
+            # Remove o registro se a quantidade for 1
+            cursor.execute("DELETE FROM carrinho WHERE id = %s", (carrinho_id,))
+    
+    conexao.commit()
+    conexao.close()
+
