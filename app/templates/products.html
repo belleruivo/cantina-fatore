@@ -4,6 +4,17 @@
 
 {% block content %}
 
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="fixed top-4 right-4 z-50 p-4 rounded-md {{ 'bg-red-500' if category == 'error' else 'bg-green-500' }} text-white">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <!-- resto do seu conteúdo -->
+
 <div class="mb-6">
     <div class="flex items-center justify-center space-x-4 w-full">
         <div class="flex-1 max-w-md sm:max-w-xs"> <!-- Ajustando a largura máxima para telas menores -->
@@ -87,7 +98,7 @@
         </div>
         <div class="mt-4">
             <p class="text-lg mb-4 font-semibold">Total: R$ {{ total }}</p> <!-- Exibe o total -->
-            <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 w-full">
+            <button id="prosseguir-carrinho" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 w-full">
                 Prosseguir
             </button>
         </div>
@@ -178,6 +189,71 @@
         </form>
     </div>
 </div>
+
+<div id="modal-registrar-venda" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 hidden" data-total-carrinho="{{ total }}">
+    <div class="bg-white w-96 p-6 rounded shadow-lg">
+        <h2 class="text-xl font-bold mb-4">Registrar Venda</h2>
+        
+        <!-- Seletor de Tipo de Comprador -->
+        <label for="comprador_tipo" class="block mb-2 font-medium">Tipo de Comprador</label>
+        <select id="comprador_tipo" class="w-full p-2 border rounded mb-4">
+            <option value="aluno">Aluno</option>
+            <option value="funcionario">Funcionário</option>
+        </select>
+
+        <!-- Seletor de Funcionário (aparece apenas se for selecionado "funcionario") -->
+        <div id="funcionario-section" class="hidden">
+            <label for="funcionario_id" class="block mb-2 font-medium">Funcionário</label>
+            <select id="funcionario_id" class="w-full p-2 border rounded mb-4">
+                {% if funcionarios %}
+                    {% for funcionario in funcionarios %}
+                        <option value="{{ funcionario.id }}">{{ funcionario.nome }}</option>
+                    {% endfor %}
+                {% else %}
+                    <option value="">Nenhum funcionário cadastrado</option>
+                {% endif %}
+            </select>
+        </div>
+
+        <!-- Seção de Método de Pagamento -->
+        <h3 class="font-bold mb-2">Método de Pagamento</h3>
+        <div id="metodos-pagamento" class="space-y-2 mb-4">
+            <div class="flex items-center">
+                <input type="checkbox" id="pagamento-dinheiro" name="pagamento_metodo" value="dinheiro" class="mr-2">
+                <label for="pagamento-dinheiro" class="flex-1">Dinheiro</label>
+                <input type="number" id="valor-dinheiro" class="border p-2 rounded w-24" placeholder="0.00" min="0" step="0.01" disabled>
+            </div>
+            <div class="flex items-center">
+                <input type="checkbox" id="pagamento-cartao" name="pagamento_metodo" value="cartao" class="mr-2">
+                <label for="pagamento-cartao" class="flex-1">Cartão</label>
+                <input type="number" id="valor-cartao" class="border p-2 rounded w-24" placeholder="0.00" min="0" step="0.01" disabled>
+            </div>
+            <div class="flex items-center">
+                <input type="checkbox" id="pagamento-pix" name="pagamento_metodo" value="pix" class="mr-2">
+                <label for="pagamento-pix" class="flex-1">Pix</label>
+                <input type="number" id="valor-pix" class="border p-2 rounded w-24" placeholder="0.00" min="0" step="0.01" disabled>
+            </div>
+        </div>
+
+        <!-- Total e Data da Venda -->
+        <div class="mb-4">
+            <p class="font-medium">Total: <span id="total-venda" class="text-green-600">R$ 0,00</span></p>
+        </div>
+        <div class="mb-4">
+            <label for="data-venda" class="block mb-2 font-medium">Data da Venda</label>
+            <input type="datetime-local" id="data-venda" class="w-full p-2 border rounded" value="" readonly>
+        </div>
+
+        <!-- Botões -->
+        <div class="flex justify-between">
+            <button id="cancelar-venda" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Cancelar</button>
+            <button id="salvar-venda" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed">
+                Salvar
+            </button>
+        </div>
+    </div>
+</div>
+
 
 <script src="../static/js/products.js"></script>
 

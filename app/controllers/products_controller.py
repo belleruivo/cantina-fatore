@@ -1,5 +1,6 @@
-from flask import render_template, redirect, url_for, request
-from app.models.products_model import obter_todos_produtos, buscar_produtos, obter_itens_carrinho, adicionar_ao_carrinho, remover_do_carrinho, atualizar_produto, adicionar_produto
+from flask import render_template, redirect, url_for, request, flash, jsonify
+from app.models.products_model import obter_todos_produtos, buscar_produtos, obter_itens_carrinho, adicionar_ao_carrinho, remover_do_carrinho, atualizar_produto, adicionar_produto, salvar_venda_db
+from app.models.employees_model import obter_todos_funcionarios
 from app.utils.database import get_db_connection  
 
 import os
@@ -13,8 +14,16 @@ def product_list():
     
     # recupera itens do carrinho e o total
     itens_carrinho, total = obter_itens_carrinho()
-    return render_template("products.html", produtos=produtos, itens_carrinho=itens_carrinho, total=total, show_sidebar=True)
 
+    funcionarios = obter_todos_funcionarios()  # Adicione esta linha
+    return render_template(
+        "products.html",
+        produtos=produtos,
+        itens_carrinho=itens_carrinho,
+        total=total,
+        funcionarios=funcionarios,  # Adicione esta linha
+        show_sidebar=True
+    )
 
 def salvar_produto():
     if request.method == 'POST':
@@ -75,11 +84,58 @@ def excluir_produto(id):
     conexao.close()
     return redirect(url_for('product_list'))
 
+from flask import render_template, redirect, url_for, request, flash  # Adicione o flash aqui
+
 def vender_produto(id):
-    quantidade = request.form.get('quantidade', 1)
-    adicionar_ao_carrinho(id, quantidade)
+    quantidade = int(request.form.get('quantidade', 1))
+    sucesso, mensagem = adicionar_ao_carrinho(id, quantidade)
+    
+    if not sucesso:
+        flash(mensagem, 'error')
+    else:
+        flash(mensagem, 'success')
+        
     return redirect(url_for('product_list'))
 
 def remover_produto_do_carrinho(carrinho_id):
     remover_do_carrinho(carrinho_id)
     return redirect(url_for('product_list'))
+
+def registrar_venda():
+    try:
+        dados = request.json
+        comprador_tipo = dados['comprador_tipo']
+        comprador_id = dados['comprador_id'] if comprador_tipo == 'funcionario' else None  # Alterado de 0 para None
+        valores_pagamento = {
+            'dinheiro': float(dados['valor_dinheiro'] or 0),
+            'cartao': float(dados['valor_cartao'] or 0),
+            'pix': float(dados['valor_pix'] or 0)
+        }
+        
+        # resto do código continua igual
+        
+        # Obter itens do carrinho
+        itens_carrinho, total = obter_itens_carrinho()
+        
+        # Validar o total
+        total_pagamento = sum(valores_pagamento.values())
+        if total_pagamento != total:
+            return jsonify({'success': False, 'message': 'Valores de pagamento não conferem com o total'}), 400
+            
+        sucesso, mensagem = salvar_venda_db(  # Alterado aqui
+            comprador_tipo,
+            comprador_id,
+            valores_pagamento,
+            itens_carrinho,
+            total
+        )
+        
+        if sucesso:
+            flash(mensagem, 'success')
+            return jsonify({'success': True, 'message': mensagem})
+        else:
+            flash(mensagem, 'error')
+            return jsonify({'success': False, 'message': mensagem}), 400
+            
+    except Exception as e:
+        return jsonify({'success': False, 'message': str(e)}), 500
