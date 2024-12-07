@@ -1,5 +1,7 @@
 from flask import render_template, request, redirect, url_for
-from app.models.employees_model import obter_todos_funcionarios, adicionar_funcionario, atualizar_funcionario, excluir_funcionario as excluir_funcionario_model
+from app.models.employees_model import Funcionario, obter_todos_funcionarios
+
+funcionario_crud = Funcionario()
 
 def employees_list():
     # Recupera a lista de funcionários
@@ -9,15 +11,18 @@ def employees_list():
 def salvar_funcionario():
     if request.method == 'POST':
         nome = request.form['nome']
-        adicionar_funcionario(nome)
+        funcionario = Funcionario()  # Cria a instância do objeto Funcionario
+        funcionario.salvar(nome)  # Usa a implementação CRUD para salvar
         return redirect(url_for('funcionarios'))
 
 def editar_funcionario(id):
     if request.method == 'POST':
         nome = request.form['nome']
-        atualizar_funcionario(id, nome)
+        funcionario = Funcionario(id=id)  # Cria a instância do objeto Funcionario
+        funcionario.atualizar(id, nome)  # Usa a implementação CRUD para atualizar
         return redirect(url_for('funcionarios'))
 
 def excluir_funcionario(id):
-    excluir_funcionario_model(id)  
+    funcionario = Funcionario(id=id)  # Cria a instância do objeto Funcionario
+    funcionario.excluir(id)  # Usa a implementação CRUD para excluir
     return redirect(url_for('funcionarios'))
