@@ -1,31 +1,38 @@
 # depois de import vai o nome da classe ou método
 from flask import Flask
 from app.controllers.main_controller import home
-from app.controllers.products_controller import product_list, editar_produto, excluir_produto, vender_produto, salvar_produto, remover_produto_do_carrinho, registrar_venda
+from app.controllers.products_controller import CRUDProduto
+from app.controllers.vendas_controller import CRUDVendas
 from app.controllers.login_controller import LoginController, login_required 
-from app.controllers.employees_controller import employees_list, salvar_funcionario, editar_funcionario, excluir_funcionario
+from app.models.employees_model import FuncionarioRepository
+from app.controllers.employees_controller import CRUDFuncionario
 from app.controllers.reports_controller import reports
+
 
 # inicializa os pacotes
 def create_app():
     app = Flask(__name__)
     app.secret_key = "9wefjfsdfsdaodaofjejcaqwqwewqeoooopwq"
 
+    funcionario_repository = FuncionarioRepository()
+    funcionario = CRUDFuncionario(funcionario_repository)
+    produto = CRUDProduto()
+
     # esses 3 "parâmetros" são: o caminho da rota, o nome da rota (usado em layout) e o nome da função ou método que será executado ao acessar aquela rota.
     app.add_url_rule('/', 'home', home) 
     app.add_url_rule('/login', 'login', LoginController.login, methods=["GET", "POST"]) 
     app.add_url_rule('/logout', 'logout', LoginController.logout) 
-    app.add_url_rule('/produtos', 'product_list', login_required(product_list))  
-    app.add_url_rule('/produtos/editar/<int:id>', 'editar_produto', login_required(editar_produto), methods=['GET', 'POST'])  
-    app.add_url_rule('/produtos/excluir/<int:id>', 'excluir_produto', login_required(excluir_produto), methods=["POST"])  
-    app.add_url_rule('/produtos/vender/<int:id>', 'vender_produto', login_required(vender_produto), methods=["POST"])  
-    app.add_url_rule('/produtos/salvar', 'salvar_produto', login_required(salvar_produto), methods=['POST'])  
-    app.add_url_rule('/funcionarios', 'funcionarios', login_required(employees_list)) 
-    app.add_url_rule('/funcionarios/adicionar', 'salvar_funcionario', salvar_funcionario, methods=['POST'])
-    app.add_url_rule('/funcionarios/editar/<int:id>', 'editar_funcionario', editar_funcionario, methods=['POST'])
-    app.add_url_rule('/funcionarios/excluir/<int:id>', 'excluir_funcionario', excluir_funcionario, methods=['POST'])
+    app.add_url_rule('/produtos', 'product_list', login_required(produto.listar))  
+    app.add_url_rule('/produtos/editar/<int:id>', 'editar_produto', login_required(produto.atualizar), methods=['GET', 'POST'])  
+    app.add_url_rule('/produtos/excluir/<int:id>', 'excluir_produto', login_required(produto.remover), methods=["POST"])  
+    app.add_url_rule('/produtos/vender/<int:id>', 'vender_produto', login_required(CRUDVendas.vender_produto), methods=["POST"])  
+    app.add_url_rule('/produtos/salvar', 'salvar_produto', login_required(produto.cadastrar), methods=['POST'])  
+    app.add_url_rule('/funcionarios', 'funcionarios', login_required(funcionario.listar)) 
+    app.add_url_rule('/funcionarios/adicionar', 'salvar_funcionario', funcionario.cadastrar, methods=['POST'])
+    app.add_url_rule('/funcionarios/editar/<int:id>', 'editar_funcionario', funcionario.atualizar, methods=['POST'])
+    app.add_url_rule('/funcionarios/excluir/<int:id>', 'excluir_funcionario', funcionario.remover, methods=['POST'])
     app.add_url_rule('/relatorios', 'relatorios', login_required(reports))  
-    app.add_url_rule('/remover/<int:carrinho_id>', 'remover_produto_do_carrinho',  login_required(remover_produto_do_carrinho), methods=['POST'])
-    app.add_url_rule('/registrar-venda', 'registrar_venda', login_required(registrar_venda), methods=['POST'])
+    app.add_url_rule('/remover/<int:carrinho_id>', 'remover_produto_do_carrinho',  login_required(CRUDVendas.remover_produto_do_carrinho), methods=['POST'])
+    app.add_url_rule('/registrar-venda', 'registrar_venda', login_required(CRUDVendas.registrar_venda), methods=['POST'])
     
     return app
