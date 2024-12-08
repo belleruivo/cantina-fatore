@@ -1,7 +1,8 @@
 from app.utils.database import get_db_connection
 """tiraria daqui e colocaria em uma pasta de banco, assim como está no diagrama"""
 
-class Venda: 
+class VendaRepository: 
+    @staticmethod
     def adicionar_ao_carrinho(produto_id, quantidade):
         conexao = get_db_connection()
         cursor = conexao.cursor()
@@ -40,7 +41,7 @@ class Venda:
         conexao.close()
         return True, "Produto adicionado ao carrinho com sucesso!"
 
-
+    @staticmethod
     def obter_itens_carrinho():
         conexao = get_db_connection()
         cursor = conexao.cursor()
@@ -58,7 +59,7 @@ class Venda:
         conexao.close()
         return itens, total
 
-
+    @staticmethod
     def remover_do_carrinho(carrinho_id):
         conexao = get_db_connection()
         cursor = conexao.cursor()
@@ -84,6 +85,7 @@ class Venda:
         conexao.commit()
         conexao.close()
 
+    @staticmethod
     def salvar_venda_db(comprador_tipo, comprador_id, valores_pagamento, itens_carrinho, total):
         conexao = get_db_connection()
         cursor = conexao.cursor()

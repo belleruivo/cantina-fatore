@@ -1,10 +1,13 @@
 from flask import redirect, url_for, request, flash, jsonify
-from app.models.vendas_model import Venda
+from app.models.vendas_model import VendaRepository
 
 class CRUDVendas:
-    def vender_produto(id):
+    def __init__(self, venda_repository: VendaRepository):
+        self.venda_repository = venda_repository # Injeção de dependência do repositório**
+
+    def vender_produto(self, id):
         quantidade = int(request.form.get('quantidade', 1))
-        sucesso, mensagem = Venda.adicionar_ao_carrinho(id, quantidade)
+        sucesso, mensagem = self.venda_repository.adicionar_ao_carrinho(id, quantidade)
         
         if not sucesso:
             flash(mensagem, 'error')
@@ -13,11 +16,11 @@ class CRUDVendas:
             
         return redirect(url_for('product_list'))
 
-    def remover_produto_do_carrinho(carrinho_id):
-        Venda.remover_do_carrinho(carrinho_id)
+    def remover_produto_do_carrinho(self, carrinho_id):
+        self.venda_repository.remover_do_carrinho(carrinho_id)
         return redirect(url_for('product_list'))
 
-    def registrar_venda():
+    def registrar_venda(self):
         try:
             dados = request.json
             comprador_tipo = dados['comprador_tipo']
@@ -31,14 +34,14 @@ class CRUDVendas:
             # resto do código continua igual
             
             # Obter itens do carrinho
-            itens_carrinho, total = Venda.obter_itens_carrinho()
+            itens_carrinho, total = self.venda_repository.obter_itens_carrinho()
             
             # Validar o total
             total_pagamento = sum(valores_pagamento.values())
             if total_pagamento != total:
                 return jsonify({'success': False, 'message': 'Valores de pagamento não conferem com o total'}), 400
                 
-            sucesso, mensagem = Venda.salvar_venda_db(  # Alterado aqui
+            sucesso, mensagem = self.venda_repository.salvar_venda_db(  # Alterado aqui
                 comprador_tipo,
                 comprador_id,
                 valores_pagamento,

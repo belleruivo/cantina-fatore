@@ -1,13 +1,15 @@
 from flask import render_template, redirect, url_for, request, flash, jsonify
-from app.models.products_model import Produto
-from app.models.vendas_model import Venda
+from app.models.products_model import ProdutoRepository
+from app.models.vendas_model import VendaRepository
 from app.models.employees_model import FuncionarioRepository
 from app.controllers.interface_controller import CadastroInterface, AtualizacaoInterface, RemocaoInterface, ListagemInterface
-
 
 import os
 
 class CRUDProduto(CadastroInterface, AtualizacaoInterface, RemocaoInterface, ListagemInterface):
+    def __init__(self, produto_repository: ProdutoRepository):
+        self.produto_repository = produto_repository # Injeção de dependência do repositório**
+
     def cadastrar(self):
         if request.method == 'POST':
             nome = request.form['nome']
@@ -34,7 +36,7 @@ class CRUDProduto(CadastroInterface, AtualizacaoInterface, RemocaoInterface, Lis
                 # armazena apenas o caminho relativo a partir de 'static/uploads'
                 foto_caminho = os.path.join('uploads', foto_nome)
 
-            Produto.adicionar_produto(nome, preco, categoria, quantidade_estoque, foto_caminho)
+            self.produto_repository.adicionar_produto(nome, preco, categoria, quantidade_estoque, foto_caminho)
 
             return redirect(url_for('product_list'))
 
@@ -56,22 +58,22 @@ class CRUDProduto(CadastroInterface, AtualizacaoInterface, RemocaoInterface, Lis
                 # armazena apenas o caminho relativo a partir de 'static/uploads'
                 foto_caminho = os.path.join('uploads', foto_nome)
 
-            Produto.atualizar_produto(id, nome, preco, categoria, quantidade_estoque, foto_caminho)
+            self.produto_repository.atualizar_produto(id, nome, preco, categoria, quantidade_estoque, foto_caminho)
             return redirect(url_for('product_list'))
         
     def remover(self, id):
-        Produto.excluir_produto(id)
+        self.produto_repository.excluir_produto(id)
         return redirect(url_for('product_list'))
 
     def listar(self):
         query = request.args.get('query')
         if query:
-            produtos = Produto.buscar_produtos(query)
+            produtos = self.produto_repository.buscar_produtos(query)
         else:
-            produtos = Produto.obter_todos_produtos()
+            produtos = self.produto_repository.obter_todos_produtos()
         
         # recupera itens do carrinho e o total
-        itens_carrinho, total = Venda.obter_itens_carrinho()
+        itens_carrinho, total = VendaRepository.obter_itens_carrinho()
 
         funcionarios = FuncionarioRepository.obter_todos_funcionarios()  # Adicione esta linha
         return render_template(
