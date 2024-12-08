@@ -1,28 +1,30 @@
 from flask import render_template, request, redirect, url_for
-from app.models.employees_model import Funcionario, obter_todos_funcionarios
+from app.models.employees_model import Funcionario, FuncionarioRepository
+#from app.repositories.funcionario_repository import FuncionarioRepository
+from app.controllers.interface_controller import CadastroInterface, AtualizacaoInterface, RemocaoInterface, ListagemInterface
 
-funcionario_crud = Funcionario()
+class CRUDFuncionario(CadastroInterface, AtualizacaoInterface, RemocaoInterface, ListagemInterface):
+    def __init__(self, funcionario_repository: FuncionarioRepository):
+        self.funcionario_repository = funcionario_repository # Injeção de dependência do repositório**
 
-def employees_list():
-    # Recupera a lista de funcionários
-    funcionarios = obter_todos_funcionarios()
-    return render_template("employees.html", funcionarios=funcionarios, show_sidebar=True)
+    def cadastrar(self):
+        if request.method == 'POST':
+            nome = request.form['nome']
+            self.funcionario_repository.salvar(nome)  
+            return redirect(url_for('funcionarios'))
 
-def salvar_funcionario():
-    if request.method == 'POST':
-        nome = request.form['nome']
-        funcionario = Funcionario()  # Cria a instância do objeto Funcionario
-        funcionario.salvar(nome)  # Usa a implementação CRUD para salvar
+    def atualizar(self, id):
+        if request.method == 'POST':
+            nome = request.form['nome']
+            self.funcionario_repository.atualizar(id, nome) 
+            return redirect(url_for('funcionarios'))
+
+    def remover(self, id):
+        self.funcionario_repository.excluir(id)  
         return redirect(url_for('funcionarios'))
 
-def editar_funcionario(id):
-    if request.method == 'POST':
-        nome = request.form['nome']
-        funcionario = Funcionario(id=id)  # Cria a instância do objeto Funcionario
-        funcionario.atualizar(id, nome)  # Usa a implementação CRUD para atualizar
-        return redirect(url_for('funcionarios'))
+    def listar(self):
+        funcionarios_data = self.funcionario_repository.obter_todos_funcionarios()  
+        funcionarios = [Funcionario(id=linha[0], nome=linha[1], total_gasto=linha[2]) for linha in funcionarios_data]
+        return render_template("employees.html", funcionarios=funcionarios, show_sidebar=True)
 
-def excluir_funcionario(id):
-    funcionario = Funcionario(id=id)  # Cria a instância do objeto Funcionario
-    funcionario.excluir(id)  # Usa a implementação CRUD para excluir
-    return redirect(url_for('funcionarios'))
