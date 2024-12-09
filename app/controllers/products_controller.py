@@ -2,11 +2,11 @@ from flask import render_template, redirect, url_for, request, flash, jsonify
 from app.models.products_model import ProdutoRepository
 from app.models.vendas_model import VendaRepository
 from app.models.employees_model import FuncionarioRepository
-from app.controllers.interface_controller import CadastroInterface, AtualizacaoInterface, RemocaoInterface, ListagemInterface
+from app.controllers.interface_controller import CRUDInterface
 
 import os
 
-class CRUDProduto(CadastroInterface, AtualizacaoInterface, RemocaoInterface, ListagemInterface):
+class CRUDProduto(CRUDInterface):
     def __init__(self, produto_repository: ProdutoRepository):
         self.produto_repository = produto_repository # Injeção de dependência do repositório**
 
