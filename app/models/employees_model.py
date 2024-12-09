@@ -1,5 +1,7 @@
 from app.utils.database import get_db_connection
 
+''' PRINCÍPIO DA RESPONSABILIDADE ÚNICA: a classe FuncionarioRepository é responsável por salvar, excluir, atualizar e obter todos os funcionários.'''
+
 class Funcionario:
     def __init__(self, id=None, nome=None, total_gasto=0.00):
         self.id = id
@@ -8,10 +10,6 @@ class Funcionario:
 
     def __str__(self):
         return f"Funcionario({self.id}, {self.nome}, {self.total_gasto})"
-
-''' PRINCÍPIO DA RESPONSABILIDADE ÚNICA: a classe FuncionarioRepository é responsável por salvar, excluir, atualizar e obter todos os funcionários.'''
-
-''' CLASSES ABSTRATAS: a classe FuncionarioRepository é uma classe abstrata porque não é uma classe concreta, mas uma classe que define os métodos que as classes concretas devem implementar.'''
 class FuncionarioRepository:
     @staticmethod
     def salvar(nome, total_gasto=0.00):
