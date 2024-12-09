@@ -14,6 +14,8 @@ class Produto:
         return f"Produto({self.id}, {self.nome}, {self.preco}, {self.categoria}, {self.quantidade_estoque}, {self.foto})"
 
     '''METÓDOS DE CLASSE: Aqui estão os métodos de classe que interagem com o banco de dados.'''
+class ProdutoRepository:
+    @staticmethod
     def buscar_produtos(query):
         conexao = get_db_connection()
         cursor = conexao.cursor()
@@ -25,6 +27,7 @@ class Produto:
         produtos = [Produto(*linha) for linha in resultados]
         return produtos
 
+    @staticmethod
     def obter_todos_produtos():
         conexao = get_db_connection()
         cursor = conexao.cursor()
@@ -38,6 +41,7 @@ class Produto:
         produtos = [Produto(*linha) for linha in resultados]
         return produtos
 
+    @staticmethod
     def adicionar_produto(nome, preco, categoria, quantidade_estoque, foto=None):
         conexao = get_db_connection()
         cursor = conexao.cursor()
@@ -51,6 +55,7 @@ class Produto:
         conexao.commit()
         conexao.close()
 
+    @staticmethod
     def atualizar_produto(id, nome, preco, categoria, quantidade_estoque, foto):
         conexao = get_db_connection()
         cursor = conexao.cursor()
@@ -74,7 +79,7 @@ class Produto:
         conexao.commit()
         conexao.close()
 
-        
+    @staticmethod
     def excluir_produto(id):
         conexao = get_db_connection()
         cursor = conexao.cursor()

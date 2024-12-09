@@ -1,7 +1,7 @@
 from app.utils.database import get_db_connection
 from decimal import Decimal
 
-class Venda:
+class VendaRepository: 
     @staticmethod
     def adicionar_ao_carrinho(produto_id, quantidade):
         conexao = get_db_connection()

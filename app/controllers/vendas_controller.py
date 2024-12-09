@@ -1,12 +1,14 @@
 from flask import redirect, url_for, request, flash, jsonify
-from app.models.vendas_model import Venda
+from app.models.vendas_model import VendaRepository
 from decimal import Decimal
 
 class CRUDVendas:
-    @staticmethod
-    def vender_produto(id):
+    def __init__(self, venda_repository: VendaRepository):
+        self.venda_repository = venda_repository # Injeção de dependência do repositório**
+
+    def vender_produto(self, id):
         quantidade = int(request.form.get('quantidade', 1))
-        sucesso, mensagem = Venda.adicionar_ao_carrinho(id, quantidade)
+        sucesso, mensagem = self.venda_repository.adicionar_ao_carrinho(id, quantidade)
         
         if not sucesso:
             flash(mensagem, 'error')
@@ -15,13 +17,11 @@ class CRUDVendas:
             
         return redirect(url_for('product_list'))
 
-    @staticmethod
-    def remover_produto_do_carrinho(carrinho_id):
-        Venda.remover_do_carrinho(carrinho_id)
+    def remover_produto_do_carrinho(self, carrinho_id):
+        self.venda_repository.remover_do_carrinho(carrinho_id)
         return redirect(url_for('product_list'))
 
-    @staticmethod
-    def registrar_venda():
+    def registrar_venda(self):
         try:
             dados = request.json
             comprador_tipo = dados['comprador_tipo']
@@ -35,16 +35,15 @@ class CRUDVendas:
             }
             
             # Obter itens do carrinho
-            itens_carrinho, total = Venda.obter_itens_carrinho()
+            itens_carrinho, total = self.venda_repository.obter_itens_carrinho()
             total = Decimal(str(total))  # Certifique-se de que o total também seja um Decimal
             
             # Validar o total
             total_pagamento = sum(valores_pagamento.values())
             if total_pagamento != total:
                 return jsonify({'success': False, 'message': 'Valores de pagamento não conferem com o total'}), 400
-
-            # Salvar venda no banco de dados
-            sucesso, mensagem = Venda.salvar_venda_db(
+                
+            sucesso, mensagem = self.venda_repository.salvar_venda_db(  # Alterado aqui
                 comprador_tipo,
                 comprador_id,
                 valores_pagamento,
