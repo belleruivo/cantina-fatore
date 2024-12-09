@@ -3,9 +3,17 @@ from app.models.employees_model import Funcionario, FuncionarioRepository
 #from app.repositories.funcionario_repository import FuncionarioRepository
 from app.controllers.interface_controller import CadastroInterface, AtualizacaoInterface, RemocaoInterface, ListagemInterface
 
+''' PRINCÍPIO DE LISKOV: nesse caso, ele é cumprido, pois a classe CRUDFuncionario implementa as interfaces CadastroInterface, AtualizacaoInterface, RemocaoInterface e ListagemInterface. 
+Em resumo, a classe CRUDFuncionario pode ser substituída por qualquer outra classe que implemente as mesmas interfaces.'''
+
+''' PRINCÍPIO DA RESPONSABILIDADE ÚNICA: na classe CRUDFuncionario, temos a implementação de cada método da interface.'''
+
+''' PRINCÍPIO DA SEGREGAÇÃO DE INTERFACE: cada método da interface é implementado em uma classe diferente.'''
+
+'''PRINCÍPIO DA INJEÇÃO DE DEPENDÊNCIA: no construtor, a classe recebe uma instância de FuncionarioRepository, ou seja, a classe FuncionarioRepository é injetada na classe CRUDFuncionario.'''
 class CRUDFuncionario(CadastroInterface, AtualizacaoInterface, RemocaoInterface, ListagemInterface):
     def __init__(self, funcionario_repository: FuncionarioRepository):
-        self.funcionario_repository = funcionario_repository # Injeção de dependência do repositório**
+        self.funcionario_repository = funcionario_repository 
 
     def cadastrar(self):
         if request.method == 'POST':
@@ -24,7 +32,6 @@ class CRUDFuncionario(CadastroInterface, AtualizacaoInterface, RemocaoInterface,
         return redirect(url_for('funcionarios'))
 
     def listar(self):
-        funcionarios_data = self.funcionario_repository.obter_todos_funcionarios()  
-        funcionarios = [Funcionario(id=linha[0], nome=linha[1], total_gasto=linha[2]) for linha in funcionarios_data]
+        funcionarios = self.funcionario_repository.obter_todos_funcionarios()  
         return render_template("employees.html", funcionarios=funcionarios, show_sidebar=True)
 

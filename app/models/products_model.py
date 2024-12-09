@@ -13,6 +13,7 @@ class Produto:
     def __str__(self):
         return f"Produto({self.id}, {self.nome}, {self.preco}, {self.categoria}, {self.quantidade_estoque}, {self.foto})"
 
+    '''METÓDOS DE CLASSE: Aqui estão os métodos de classe que interagem com o banco de dados.'''
     def buscar_produtos(query):
         conexao = get_db_connection()
         cursor = conexao.cursor()

@@ -4,7 +4,6 @@ from app.models.vendas_model import Venda
 from app.models.employees_model import FuncionarioRepository
 from app.controllers.interface_controller import CadastroInterface, AtualizacaoInterface, RemocaoInterface, ListagemInterface
 
-
 import os
 
 class CRUDProduto(CadastroInterface, AtualizacaoInterface, RemocaoInterface, ListagemInterface):
@@ -73,15 +72,12 @@ class CRUDProduto(CadastroInterface, AtualizacaoInterface, RemocaoInterface, Lis
         # recupera itens do carrinho e o total
         itens_carrinho, total = Venda.obter_itens_carrinho()
 
-        funcionarios = FuncionarioRepository.obter_todos_funcionarios()  # Adicione esta linha
+        funcionarios = FuncionarioRepository.obter_todos_funcionarios()  
         return render_template(
             "products.html",
             produtos=produtos,
             itens_carrinho=itens_carrinho,
             total=total,
-            funcionarios=funcionarios,  # Adicione esta linha
+            funcionarios=funcionarios,
             show_sidebar=True
         )
-
-
-

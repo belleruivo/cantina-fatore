@@ -28,9 +28,9 @@ def create_app():
     app.add_url_rule('/produtos/vender/<int:id>', 'vender_produto', login_required(CRUDVendas.vender_produto), methods=["POST"])  
     app.add_url_rule('/produtos/salvar', 'salvar_produto', login_required(produto.cadastrar), methods=['POST'])  
     app.add_url_rule('/funcionarios', 'funcionarios', login_required(funcionario.listar)) 
-    app.add_url_rule('/funcionarios/adicionar', 'salvar_funcionario', funcionario.cadastrar, methods=['POST'])
-    app.add_url_rule('/funcionarios/editar/<int:id>', 'editar_funcionario', funcionario.atualizar, methods=['POST'])
-    app.add_url_rule('/funcionarios/excluir/<int:id>', 'excluir_funcionario', funcionario.remover, methods=['POST'])
+    app.add_url_rule('/funcionarios/adicionar', 'salvar_funcionario', login_required(funcionario.cadastrar), methods=['POST'])
+    app.add_url_rule('/funcionarios/editar/<int:id>', 'editar_funcionario', login_required(funcionario.atualizar), methods=['POST'])
+    app.add_url_rule('/funcionarios/excluir/<int:id>', 'excluir_funcionario', login_required(funcionario.remover), methods=['POST'])
 
     app.add_url_rule('/relatorios', 'relatorios', login_required(RelatorioVendas.gerar_relatorio_vendas))
     app.add_url_rule('/download/relatorio-geral', 'download_relatorio_geral', login_required(RelatorioVendas.download_relatorio))

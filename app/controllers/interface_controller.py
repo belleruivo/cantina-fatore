@@ -1,6 +1,9 @@
 from abc import ABC, abstractmethod
 
-class CadastroInterface(ABC): #Segregação de interface**
+''' PRINCÍPIO DA SEGREGAÇÃO DE INTERFACE: cada método da interface é implementado em uma classe diferente.'''
+
+''' PRINCÍPIO DA SUBSTITUIÇÃO DE LISKOV: nesse caso, ele é cumprido, pois a classe CadastroInterface pode ser substituída por qualquer outra classe que implemente o mesmo método.'''
+class CadastroInterface(ABC): 
     @abstractmethod
     def cadastrar(self):
         pass
@@ -19,6 +22,3 @@ class ListagemInterface(ABC):
     @abstractmethod
     def listar(self):
         pass
-
-''' Principio da substituição de Liskov: assegura que qualquer 
-implementação dessas interfaces possa ser substituída sem alterar o comportamento esperado'''

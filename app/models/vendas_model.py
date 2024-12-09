@@ -1,28 +1,29 @@
 from app.utils.database import get_db_connection
-"""tiraria daqui e colocaria em uma pasta de banco, assim como está no diagrama"""
+from decimal import Decimal
 
-class Venda: 
+class Venda:
+    @staticmethod
     def adicionar_ao_carrinho(produto_id, quantidade):
         conexao = get_db_connection()
         cursor = conexao.cursor()
 
-        # Verifica quantidade em estoque
+        # verifica quantidade em estoque
         cursor.execute("SELECT quantidade_estoque FROM produtos WHERE id = %s", (produto_id,))
         estoque = cursor.fetchone()[0]
 
-        # Verifica quantidade atual no carrinho
+        # verifica quantidade atual no carrinho
         cursor.execute("SELECT COALESCE(SUM(quantidade), 0) FROM carrinho WHERE produto_id = %s", (produto_id,))
         quantidade_no_carrinho = cursor.fetchone()[0]
 
-        # Calcula quantidade total após adicionar
+        # calcula quantidade total após adicionar
         quantidade_total = quantidade_no_carrinho + quantidade
 
-        # Se a quantidade total ultrapassar o estoque, não permite a adição
+        # se a quantidade total ultrapassar o estoque, não permite a adição
         if quantidade_total > estoque:
             conexao.close()
             return False, f"Quantidade indisponível. Estoque: {estoque}, No carrinho: {quantidade_no_carrinho}"
         
-        # Se o produto já está no carrinho, atualiza a quantidade
+        # se o produto já está no carrinho, atualiza a quantidade
         if quantidade_no_carrinho > 0:
             cursor.execute("""
                 UPDATE carrinho
@@ -30,7 +31,7 @@ class Venda:
                 WHERE produto_id = %s
             """, (quantidade_total, produto_id))
         else:
-            # Caso contrário, adiciona o produto ao carrinho
+            # caso contrário, adiciona o produto ao carrinho
             cursor.execute("""
                 INSERT INTO carrinho (produto_id, quantidade)
                 VALUES (%s, %s)
@@ -40,12 +41,11 @@ class Venda:
         conexao.close()
         return True, "Produto adicionado ao carrinho com sucesso!"
 
-
+    @staticmethod
     def obter_itens_carrinho():
         conexao = get_db_connection()
         cursor = conexao.cursor()
         
-        # Modifique a query para pegar o ID do produto corretamente
         cursor.execute("""
             SELECT c.id as carrinho_id, p.id as produto_id, p.nome, c.quantidade, p.preco 
             FROM carrinho c 
@@ -53,12 +53,12 @@ class Venda:
         """)
         
         itens = cursor.fetchall()
-        total = sum(item[3] * item[4] for item in itens)  # quantidade * preco
+        total = sum(Decimal(str(item[3])) * Decimal(str(item[4])) for item in itens)  # quantidade * preço
         
         conexao.close()
         return itens, total
 
-
+    @staticmethod
     def remover_do_carrinho(carrinho_id):
         conexao = get_db_connection()
         cursor = conexao.cursor()
@@ -84,6 +84,7 @@ class Venda:
         conexao.commit()
         conexao.close()
 
+    @staticmethod
     def salvar_venda_db(comprador_tipo, comprador_id, valores_pagamento, itens_carrinho, total):
         conexao = get_db_connection()
         cursor = conexao.cursor()
@@ -97,20 +98,22 @@ class Venda:
                     total,
                     valor_dinheiro,
                     valor_cartao,
-                    valor_pix
-                ) VALUES (%s, %s, %s, %s, %s, %s)
+                    valor_pix,
+                    metodo_pagamento
+                ) VALUES (%s, %s, %s, %s, %s, %s, %s)
             """, (
                 comprador_tipo,
                 comprador_id,
                 total,
                 valores_pagamento.get('dinheiro', 0),
                 valores_pagamento.get('cartao', 0),
-                valores_pagamento.get('pix', 0)
+                valores_pagamento.get('pix', 0),
+                ','.join([metodo for metodo, valor in valores_pagamento.items() if valor > 0])
             ))
             
             venda_id = cursor.lastrowid
             
-            # Inserir os itens da venda
+            # inserir os itens da venda
             for item in itens_carrinho:
                 # item agora é uma tupla: (carrinho_id, produto_id, nome, quantidade, preco)
                 cursor.execute("""
@@ -129,12 +132,20 @@ class Venda:
                     item[3] * item[4]  # subtotal = quantidade * valor_unitario
                 ))
                 
-                # Atualizar o estoque
+                # atualizar o estoque
                 cursor.execute("""
                     UPDATE produtos 
                     SET quantidade_estoque = quantidade_estoque - %s 
                     WHERE id = %s
                 """, (item[3], item[1]))  # quantidade e produto_id
+            
+            # Atualizar o total gasto do funcionário, se aplicável
+            if comprador_tipo == 'funcionario' and comprador_id:
+                cursor.execute("""
+                    UPDATE funcionarios
+                    SET total_gasto = total_gasto + %s
+                    WHERE id = %s
+                """, (total, comprador_id))
             
             # Limpar o carrinho
             cursor.execute("DELETE FROM carrinho")

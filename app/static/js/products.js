@@ -138,11 +138,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-
-
-
-
-
 function calcularTotalPagamentos() {
     const valorDinheiro = parseFloat(document.getElementById('valor-dinheiro').value) || 0;
     const valorCartao = parseFloat(document.getElementById('valor-cartao').value) || 0;
