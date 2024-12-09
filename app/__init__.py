@@ -2,7 +2,7 @@
 from flask import Flask
 from app.controllers.main_controller import home
 from app.controllers.products_controller import CRUDProduto
-from app.controllers.vendas_controller import CRUDVendas
+from app.controllers.vendas_controller import GerenciarVendas
 from app.controllers.login_controller import LoginController, login_required 
 from app.controllers.reports_controller import RelatorioVendas
 from app.models.employees_model import FuncionarioRepository
@@ -22,7 +22,7 @@ def create_app():
 
     funcionario = CRUDFuncionario(funcionario_repository)
     produto = CRUDProduto(produto_repository)
-    venda = CRUDVendas(venda_repository)
+    venda = GerenciarVendas(venda_repository)
 
     # esses 3 "parâmetros" são: o caminho da rota, o nome da rota (usado em layout) e o nome da função ou método que será executado ao acessar aquela rota.
     app.add_url_rule('/', 'home', home) 

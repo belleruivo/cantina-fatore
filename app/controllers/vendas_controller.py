@@ -2,7 +2,7 @@ from flask import redirect, url_for, request, flash, jsonify
 from app.models.vendas_model import VendaRepository
 from decimal import Decimal
 
-class CRUDVendas:
+class GerenciarVendas:
     def __init__(self, venda_repository: VendaRepository):
         self.venda_repository = venda_repository # Injeção de dependência do repositório**
 
