@@ -6,6 +6,7 @@ from app.controllers.interface_controller import CRUDInterface
 
 import os
 
+'''POLIMORFISMO: usa um mesmo conjunto de métodos definido pela interface, mas com comportamentos específicos dependendo de cada classe.'''
 class CRUDProduto(CRUDInterface):
     def __init__(self, produto_repository: ProdutoRepository):
         self.produto_repository = produto_repository # Injeção de dependência do repositório**

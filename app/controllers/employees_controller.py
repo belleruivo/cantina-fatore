@@ -7,6 +7,8 @@ from app.controllers.interface_controller import CRUDInterface
 Em resumo, a classe CRUDFuncionario pode ser substituída por qualquer outra classe que implemente as mesmas interfaces.'''
 
 '''PRINCÍPIO DA INJEÇÃO DE DEPENDÊNCIA: no construtor, a classe recebe uma instância de FuncionarioRepository, ou seja, a classe FuncionarioRepository é injetada na classe CRUDFuncionario.'''
+
+'''POLIMORFISMO: usa um mesmo conjunto de métodos definido pela interface, mas com comportamentos específicos dependendo de cada classe.'''
 class CRUDFuncionario(CRUDInterface):
     def __init__(self, funcionario_repository: FuncionarioRepository):
         self.funcionario_repository = funcionario_repository 
