@@ -40,7 +40,7 @@ CREATE TABLE `carrinho` (
   KEY `produto_id` (`produto_id`),
   CONSTRAINT `carrinho_ibfk_1` FOREIGN KEY (`funcionario_id`) REFERENCES `funcionarios` (`id`),
   CONSTRAINT `carrinho_ibfk_2` FOREIGN KEY (`produto_id`) REFERENCES `produtos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=87 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=124 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -49,7 +49,7 @@ CREATE TABLE `carrinho` (
 
 LOCK TABLES `carrinho` WRITE;
 /*!40000 ALTER TABLE `carrinho` DISABLE KEYS */;
-INSERT INTO `carrinho` VALUES (82,NULL,14,2),(83,NULL,15,1),(85,NULL,18,1),(86,NULL,16,1);
+INSERT INTO `carrinho` VALUES (118,NULL,14,1),(119,NULL,17,1),(120,NULL,26,1),(121,NULL,19,3),(122,NULL,28,2),(123,NULL,27,1);
 /*!40000 ALTER TABLE `carrinho` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -65,7 +65,7 @@ CREATE TABLE `funcionarios` (
   `nome` varchar(255) NOT NULL,
   `total_gasto` decimal(10,2) DEFAULT 0.00,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -74,7 +74,7 @@ CREATE TABLE `funcionarios` (
 
 LOCK TABLES `funcionarios` WRITE;
 /*!40000 ALTER TABLE `funcionarios` DISABLE KEYS */;
-INSERT INTO `funcionarios` VALUES (2,'sa',0.00),(5,'Murilo Dantas',0.00);
+INSERT INTO `funcionarios` VALUES (8,'Aline de Lucas',10.00),(9,'Murilo da Silva Dantas',35.46),(10,'Tardelli Stekel',0.00),(11,'Raul Castanhari',0.00),(12,'Olavo Matos',0.00),(13,'Tiago de Oliveira',0.00),(14,'Rafaela Vilela',0.00),(15,'Edson Pires',0.00),(16,'Flávia de Almeida',0.00),(17,'Patrícia Alencar',0.00),(18,'Priscila Gomes',0.00);
 /*!40000 ALTER TABLE `funcionarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -97,7 +97,7 @@ CREATE TABLE `itens_venda` (
   KEY `produto_id` (`produto_id`),
   CONSTRAINT `itens_venda_ibfk_1` FOREIGN KEY (`venda_id`) REFERENCES `vendas` (`id`),
   CONSTRAINT `itens_venda_ibfk_2` FOREIGN KEY (`produto_id`) REFERENCES `produtos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -106,7 +106,7 @@ CREATE TABLE `itens_venda` (
 
 LOCK TABLES `itens_venda` WRITE;
 /*!40000 ALTER TABLE `itens_venda` DISABLE KEYS */;
-INSERT INTO `itens_venda` VALUES (3,7,15,1,2.50,2.50);
+INSERT INTO `itens_venda` VALUES (17,20,18,1,5.00,5.00),(19,22,15,1,2.50,2.50),(20,22,30,1,3.00,3.00),(21,22,26,1,4.79,4.79),(22,23,18,1,5.00,5.00),(24,24,17,1,4.99,4.99),(25,24,14,3,6.99,20.97),(26,24,13,1,5.50,5.50),(27,25,31,1,5.00,5.00);
 /*!40000 ALTER TABLE `itens_venda` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -152,7 +152,7 @@ CREATE TABLE `produtos` (
   `quantidade_estoque` int(11) NOT NULL DEFAULT 0,
   `foto` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -161,7 +161,7 @@ CREATE TABLE `produtos` (
 
 LOCK TABLES `produtos` WRITE;
 /*!40000 ALTER TABLE `produtos` DISABLE KEYS */;
-INSERT INTO `produtos` VALUES (13,'Coxinha com Catupiry',5.50,'Salgado',10,'uploads\\coxinha.png'),(14,'Fini Amora',6.99,'Doce',8,'uploads\\fini_amora.png'),(15,'Bala Freegels',2.50,'Doce',19,'uploads\\freegels.jpg'),(16,'Água Mineral',2.50,'Bebida',13,'uploads\\agua.jpg'),(17,'Misto Quente',4.99,'Lanche',8,'uploads\\misto.jpg'),(18,'Pão de Queijo',5.00,'Salgado',21,'uploads\\pao_de_queijo.jpg'),(19,'KitKat Branco',4.99,'Doce',12,'uploads\\kitkat.jpg');
+INSERT INTO `produtos` VALUES (13,'Coxinha com Catupiry',5.50,'Salgado',30,'uploads\\coxinha.png'),(14,'Fini Amora',6.99,'Doce',20,'uploads\\fini_amora.png'),(15,'Bala Freegels',2.50,'Doce',7,'uploads\\freegels.jpg'),(16,'Água Mineral',2.50,'Bebida',12,'uploads\\agua.jpg'),(17,'Misto Quente',4.99,'Lanche',10,'uploads\\misto.jpg'),(18,'Pão de Queijo',5.00,'Salgado',19,'uploads\\pao_de_queijo.jpg'),(19,'KitKat Branco',4.99,'Doce',12,'uploads\\kitkat.jpg'),(26,'Bolacha Oreo',4.79,'Doce',7,'uploads\\oreo.png'),(27,'Tortuguita',3.00,'Doce',14,'uploads\\tortuguita.png'),(28,'Refrigerante Lata',5.00,'Bebida',23,'uploads\\refri_latas.jpg'),(29,'Suco de Laranja',7.99,'Bebida',3,'uploads\\suco-laranja.png'),(30,'Toddynho',3.00,'Bebida',5,'uploads\\toddynho.jpg'),(31,'Mini Pizza',5.00,'Salgado',3,'uploads\\mini-pizza.png');
 /*!40000 ALTER TABLE `produtos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -185,7 +185,7 @@ CREATE TABLE `vendas` (
   PRIMARY KEY (`id`),
   KEY `vendas_ibfk_1` (`comprador_id`),
   CONSTRAINT `vendas_ibfk_1` FOREIGN KEY (`comprador_id`) REFERENCES `funcionarios` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -194,7 +194,7 @@ CREATE TABLE `vendas` (
 
 LOCK TABLES `vendas` WRITE;
 /*!40000 ALTER TABLE `vendas` DISABLE KEYS */;
-INSERT INTO `vendas` VALUES (7,'funcionario',2,'dinheiro',2.50,'2024-12-04 23:16:34',2.50,0.00,0.00);
+INSERT INTO `vendas` VALUES (20,'funcionario',8,'cartao',5.00,'2024-12-08 21:21:39',0.00,5.00,0.00),(21,'aluno',NULL,'dinheiro',4.00,'2024-12-08 21:32:10',4.00,0.00,0.00),(22,'aluno',NULL,'',10.29,'2024-12-08 21:39:48',4.00,5.00,1.29),(23,'funcionario',8,'',5.00,'2024-12-08 21:44:47',4.00,1.00,0.00),(24,'funcionario',9,'pix',35.46,'2024-12-08 21:52:00',0.00,0.00,35.46),(25,'aluno',NULL,'dinheiro',5.00,'2024-12-08 21:56:28',5.00,0.00,0.00);
 /*!40000 ALTER TABLE `vendas` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -207,4 +207,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-04 23:35:44
+-- Dump completed on 2024-12-08 22:16:18
