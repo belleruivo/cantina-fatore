@@ -23,6 +23,7 @@ def create_app():
     funcionario = CRUDFuncionario(funcionario_repository)
     produto = CRUDProduto(produto_repository)
     venda = GerenciarVendas(venda_repository)
+    relatorio = RelatorioVendas()
 
     # esses 3 "parâmetros" são: o caminho da rota, o nome da rota (usado em layout) e o nome da função ou método que será executado ao acessar aquela rota.
     app.add_url_rule('/', 'home', home) 
@@ -38,8 +39,8 @@ def create_app():
     app.add_url_rule('/funcionarios/editar/<int:id>', 'editar_funcionario', login_required(funcionario.atualizar), methods=['POST'])
     app.add_url_rule('/funcionarios/excluir/<int:id>', 'excluir_funcionario', login_required(funcionario.remover), methods=['POST'])
 
-    app.add_url_rule('/relatorios', 'relatorios', login_required(RelatorioVendas.gerar_relatorio_vendas))
-    app.add_url_rule('/download/relatorio-geral', 'download_relatorio_geral', login_required(RelatorioVendas.download_relatorio))
+    app.add_url_rule('/relatorios', 'relatorios', login_required(relatorio.gerar_relatorio_vendas))
+    app.add_url_rule('/download/relatorio-geral', 'download_relatorio_geral', login_required(relatorio.download_relatorio))
     
     app.add_url_rule('/remover/<int:carrinho_id>', 'remover_produto_do_carrinho',  login_required(venda.remover_produto_do_carrinho), methods=['POST'])
     app.add_url_rule('/registrar-venda', 'registrar_venda', login_required(venda.registrar_venda), methods=['POST'])
