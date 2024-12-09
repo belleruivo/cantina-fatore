@@ -8,17 +8,14 @@ class CRUDInterface(ABC):
     def cadastrar(self):
         pass
 
-class AtualizacaoInterface(ABC):
     @abstractmethod
     def atualizar(self, id):
         pass
 
-class RemocaoInterface(ABC):
     @abstractmethod
     def remover(self, id):
         pass
 
-class ListagemInterface(ABC):
     @abstractmethod
     def listar(self):
         pass
