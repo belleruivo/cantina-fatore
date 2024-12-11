@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 
-{% block title %}Produtos{% endblock %}
+{% block title %}Fatore | Produtos{% endblock %}
 
 {% block content %}
 
@@ -13,17 +13,34 @@
             {% endfor %}
         {% endif %}
     {% endwith %}
-    <!-- resto do seu conteúdo -->
 
 <div class="mb-6">
     <div class="flex items-center justify-center space-x-4 w-full">
-        <div class="flex-1 max-w-md sm:max-w-xs"> <!-- Ajustando a largura máxima para telas menores -->
-            <form action="{{ url_for('product_list') }}" method="get" class="w-full">
-                <input type="text" name="query" placeholder="Buscar produto..." class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500" />
+        <div class="flex-1 max-w-md sm:max-w-xs">
+            <form action="{{ url_for('product_list') }}" method="get" class="w-full flex items-center">
+                <div class="relative mr-2">
+                    <button type="button" id="filter-icon" class="border rounded-md p-2 bg-blue-600 text-white hover:bg-blue-700">
+                        <i class="fas fa-filter"></i> 
+                    </button>
+                    <div id="filter-options" class="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-lg hidden">
+                        <select name="categoria" class="w-full border rounded-md p-2">
+                            <option value="">Todas as categorias</option>
+                            <option value="Bebida">Bebida</option>
+                            <option value="Lanche">Lanche</option>
+                            <option value="Doce">Doce</option>
+                            <option value="Salgado">Salgado</option>
+                        </select>
+                    </div>
+                </div>
+                <input type="text" name="query" placeholder="Buscar produto..." class="w-full px-4 py-2 border rounded-md mr-2 focus:outline-none focus:ring-2 focus:ring-orange-500" />
+                
+                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+                    Filtrar
+                </button>
             </form>
         </div>
         <div>
-            <button class="bg-orange-600 text-white px-4 py-2 rounded-md hover:bg-orange-700 w-full sm:w-auto">
+            <button class="bg-orange-600 text-white px-4 py-2 rounded-md ml-20 hover:bg-orange-700 w-full sm:w-auto">
                 Novo produto
             </button>
         </div>
@@ -85,7 +102,7 @@
                                 </div>
                                 <form action="{{ url_for('remover_produto_do_carrinho', carrinho_id=item[0]) }}" method="post">
                                     <button type="submit" class="text-red-500 hover:text-red-700">
-                                        <i class="fas fa-minus-circle"></i> <!-- Ícone de menos -->
+                                        <i class="fas fa-minus-circle"></i> 
                                     </button>
                                 </form>                                
                             </li>
@@ -97,7 +114,7 @@
             </div>
         </div>
         <div class="mt-4">
-            <p class="text-lg mb-4 font-semibold">Total: R$ {{ total }}</p> <!-- Exibe o total -->
+            <p class="text-lg mb-4 font-semibold">Total: R$ {{ total }}</p> 
             <button id="prosseguir-carrinho" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 w-full disabled:opacity-50 disabled:cursor-not-allowed">
                 Prosseguir
             </button>
@@ -194,14 +211,12 @@
     <div class="bg-white w-96 p-6 rounded shadow-lg">
         <h2 class="text-xl font-bold mb-4">Registrar Venda</h2>
         
-        <!-- Seletor de Tipo de Comprador -->
         <label for="comprador_tipo" class="block mb-2 font-medium">Tipo de Comprador</label>
         <select id="comprador_tipo" class="w-full p-2 border rounded mb-4">
             <option value="aluno">Aluno</option>
             <option value="funcionario">Funcionário</option>
         </select>
 
-        <!-- Seletor de Funcionário (aparece apenas se for selecionado "funcionario") -->
         <div id="funcionario-section" class="hidden">
             <label for="funcionario_id" class="block mb-2 font-medium">Funcionário</label>
             <select id="funcionario_id" class="w-full p-2 border rounded mb-4">
@@ -215,7 +230,6 @@
             </select>
         </div>
 
-        <!-- Seção de Método de Pagamento -->
         <h3 class="font-bold mb-2">Método de Pagamento</h3>
         <div id="metodos-pagamento" class="space-y-2 mb-4">
             <div class="flex items-center">
@@ -235,7 +249,6 @@
             </div>
         </div>
 
-        <!-- Total e Data da Venda -->
         <div class="mb-4">
             <p class="font-medium">Total: <span id="total-venda" class="text-green-600">R$ 0,00</span></p>
         </div>
@@ -253,7 +266,6 @@
         </div>
     </div>
 </div>
-
 
 <script src="../static/js/products.js"></script>
 

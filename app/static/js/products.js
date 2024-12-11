@@ -268,3 +268,17 @@ document.getElementById('salvar-venda').addEventListener('click', async (e) => {
         mostrarMensagem('Erro ao processar a venda', 'error');
     }
 });
+
+// JavaScript para mostrar/ocultar as opções de filtro
+document.getElementById('filter-icon').addEventListener('click', function() {
+    const filterOptions = document.getElementById('filter-options');
+    filterOptions.classList.toggle('hidden');
+});
+
+// Fecha as opções de filtro se clicar fora
+window.addEventListener('click', function(event) {
+    const filterOptions = document.getElementById('filter-options');
+    if (!event.target.closest('#filter-icon') && !filterOptions.contains(event.target)) {
+        filterOptions.classList.add('hidden');
+    }
+});

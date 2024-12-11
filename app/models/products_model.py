@@ -16,10 +16,15 @@ class Produto:
     '''METÓDOS DE CLASSE: Aqui estão os métodos de classe que interagem com o banco de dados.'''
 class ProdutoRepository:
     @staticmethod
-    def buscar_produtos(query):
+    def buscar_produtos(query, categoria=None):
         conexao = get_db_connection()
         cursor = conexao.cursor()
-        cursor.execute("SELECT * FROM produtos WHERE nome LIKE %s", ('%' + query + '%',))
+        
+        if categoria:
+            cursor.execute("SELECT * FROM produtos WHERE nome LIKE %s AND categoria = %s", ('%' + query + '%', categoria))
+        else:
+            cursor.execute("SELECT * FROM produtos WHERE nome LIKE %s", ('%' + query + '%',))
+        
         resultados = cursor.fetchall()
         conexao.close()
         
@@ -28,14 +33,17 @@ class ProdutoRepository:
         return produtos
 
     @staticmethod
-    def obter_todos_produtos():
+    def obter_todos_produtos(categoria=None):
         conexao = get_db_connection()
         cursor = conexao.cursor()
-        cursor.execute("SELECT * FROM produtos")
+        
+        if categoria:
+            cursor.execute("SELECT * FROM produtos WHERE categoria = %s", (categoria,))
+        else:
+            cursor.execute("SELECT * FROM produtos")
+        
         resultados = cursor.fetchall()
         conexao.close()
-        
-        print(resultados)
         
         # converte para objetos Produto
         produtos = [Produto(*linha) for linha in resultados]

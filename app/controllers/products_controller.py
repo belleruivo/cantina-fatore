@@ -68,10 +68,11 @@ class CRUDProduto(CRUDInterface):
 
     def listar(self):
         query = request.args.get('query')
+        categoria = request.args.get('categoria')  # Captura a categoria selecionada
         if query:
-            produtos = self.produto_repository.buscar_produtos(query)
+            produtos = self.produto_repository.buscar_produtos(query, categoria)  # Passa a categoria para a busca
         else:
-            produtos = self.produto_repository.obter_todos_produtos()
+            produtos = self.produto_repository.obter_todos_produtos(categoria)  # Passa a categoria para obter todos os produtos
         
         # recupera itens do carrinho e o total
         itens_carrinho, total = VendaRepository.obter_itens_carrinho()
