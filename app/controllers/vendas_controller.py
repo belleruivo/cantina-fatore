@@ -4,7 +4,7 @@ from decimal import Decimal
 
 class GerenciarVendas:
     def __init__(self, venda_repository: VendaRepository):
-        self.venda_repository = venda_repository # Injeção de dependência do repositório**
+        self.venda_repository = venda_repository # Injeção de dependência do repositório
 
     def vender_produto(self, id):
         quantidade = int(request.form.get('quantidade', 1))
@@ -27,23 +27,20 @@ class GerenciarVendas:
             comprador_tipo = dados['comprador_tipo']
             comprador_id = dados['comprador_id'] if comprador_tipo == 'funcionario' else None
             
-            # Use Decimal para valores financeiros
             valores_pagamento = {
                 'dinheiro': Decimal(dados['valor_dinheiro'] or '0.00'),
                 'cartao': Decimal(dados['valor_cartao'] or '0.00'),
                 'pix': Decimal(dados['valor_pix'] or '0.00')
             }
             
-            # Obter itens do carrinho
             itens_carrinho, total = self.venda_repository.obter_itens_carrinho()
-            total = Decimal(str(total))  # Certifique-se de que o total também seja um Decimal
+            total = Decimal(str(total))  
             
-            # Validar o total
             total_pagamento = sum(valores_pagamento.values())
             if total_pagamento != total:
                 return jsonify({'success': False, 'message': 'Valores de pagamento não conferem com o total'}), 400
                 
-            sucesso, mensagem = self.venda_repository.salvar_venda_db(  # Alterado aqui
+            sucesso, mensagem = self.venda_repository.salvar_venda_db(  # alterado aqui
                 comprador_tipo,
                 comprador_id,
                 valores_pagamento,

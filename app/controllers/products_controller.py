@@ -9,7 +9,7 @@ import os
 '''POLIMORFISMO: usa um mesmo conjunto de métodos definido pela interface, mas com comportamentos específicos dependendo de cada classe.'''
 class CRUDProduto(CRUDInterface):
     def __init__(self, produto_repository: ProdutoRepository):
-        self.produto_repository = produto_repository # Injeção de dependência do repositório**
+        self.produto_repository = produto_repository # Injeção de dependência do repositório
 
     def cadastrar(self):
         if request.method == 'POST':
@@ -68,11 +68,11 @@ class CRUDProduto(CRUDInterface):
 
     def listar(self):
         query = request.args.get('query')
-        categoria = request.args.get('categoria')  # Captura a categoria selecionada
+        categoria = request.args.get('categoria')  
         if query:
-            produtos = self.produto_repository.buscar_produtos(query, categoria)  # Passa a categoria para a busca
+            produtos = self.produto_repository.buscar_produtos(query, categoria) 
         else:
-            produtos = self.produto_repository.obter_todos_produtos(categoria)  # Passa a categoria para obter todos os produtos
+            produtos = self.produto_repository.obter_todos_produtos(categoria) 
         
         # recupera itens do carrinho e o total
         itens_carrinho, total = VendaRepository.obter_itens_carrinho()

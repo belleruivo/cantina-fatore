@@ -10,7 +10,6 @@ from app.models.products_model import ProdutoRepository
 from app.models.vendas_model import VendaRepository
 from app.controllers.employees_controller import CRUDFuncionario
 
-
 # inicializa os pacotes
 def create_app():
     app = Flask(__name__)

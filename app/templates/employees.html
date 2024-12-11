@@ -6,7 +6,6 @@
 <div class="container mx-auto p-6">
     <h1 class="text-2xl font-bold mb-6">Gerenciamento de Funcionários</h1>
     
-    <!-- Formulário para adicionar novo funcionário -->
     <form action="{{ url_for('salvar_funcionario') }}" method="post" class="mb-6">
         <div class="flex gap-4">
             <input type="text" name="nome" placeholder="Nome do funcionário" required class="border p-2 w-96 rounded">
@@ -16,7 +15,6 @@
         </div>
     </form>
 
-    <!-- Lista de funcionários -->
     <ul class="space-y-4">
         {% for funcionario in funcionarios %}
             <li class="bg-gray-300 border p-4 rounded flex justify-between items-center">
@@ -25,7 +23,6 @@
                     <p>Total Gasto: <span class="text-red-700 font-bold">R$ {{ funcionario.total_gasto }}</span></p>
                 </div>
                 <div class="flex gap-4">
-                    <!-- Formulário para editar -->
                     <form action="{{ url_for('editar_funcionario', id=funcionario.id) }}" method="post" class="flex items-center">
                         <input type="text" name="nome" placeholder="Novo nome" required class="border p-2 rounded mr-2">
                         <button type="submit" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">
@@ -33,7 +30,6 @@
                         </button>
                     </form>
 
-                    <!-- Formulário para excluir -->
                     <form action="{{ url_for('excluir_funcionario', id=funcionario.id) }}" method="post">
                         <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
                             Excluir

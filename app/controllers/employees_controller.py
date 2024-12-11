@@ -1,6 +1,5 @@
 from flask import render_template, request, redirect, url_for
 from app.models.employees_model import FuncionarioRepository
-#from app.repositories.funcionario_repository import FuncionarioRepository
 from app.controllers.interface_controller import CRUDInterface
 
 ''' PRINCÍPIO DE LISKOV: nesse caso, ele é cumprido, pois a classe CRUDFuncionario implementa as interfaces CadastroInterface, AtualizacaoInterface, RemocaoInterface e ListagemInterface. 
