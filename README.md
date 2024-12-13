@@ -3,7 +3,7 @@ Um sistema web  para gerenciamento da cantina escolar da Fatore.
 
 Uma aplicação web para gerenciamento de estoque de produtos e vendas da cantina da escola Fatore. Ele permite cadastrar produtos e acompanhar, em tempo real, o status desses produtos linkado aos respectivos funcionários e alunos que compram lá, fornecendo uma gestão mais eficaz e automatizada, substituindo as anotações que atualmente são feitas de forma manual.
 
-# 📂 Documentação do projeto (em andamento):
+# 📂 Documentação do projeto:
 - Como rodo esse sistema na minha máquina? Confira este documento que contém o passo-a-passo:
   https://docs.google.com/document/d/16KqSVqPjW1MVPeKiq2HcmLe6XbqLDWCoPXC1qd19Rx0/edit?usp=sharing
 - Relatório documentado a ser entregue ao docente Raul que leciona a máteria de "Engenharia de Software I":
