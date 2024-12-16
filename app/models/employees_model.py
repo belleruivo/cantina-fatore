@@ -48,4 +48,16 @@ class FuncionarioRepository:
         cursor.execute("SELECT id, nome, total_gasto FROM funcionarios")
         resultados = cursor.fetchall()
         conexao.close()
-        return [Funcionario(id=linha[0], nome=linha[1], total_gasto=linha[2]) for linha in resultados]
+
+        funcionarios = [Funcionario(id=linha[0], nome=linha[1], total_gasto=linha[2]) for linha in resultados]
+        
+        # Bubble Sort 
+        n = len(funcionarios)
+        for i in range(n):
+            for j in range(0, n - i - 1):
+                if funcionarios[j].nome.lower() > funcionarios[j + 1].nome.lower():
+                    funcionarios[j], funcionarios[j + 1] = funcionarios[j + 1], funcionarios[j]
+
+        return funcionarios
+
+
